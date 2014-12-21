@@ -1,0 +1,24 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-4.1.xsd">
+
+	<bean id="userDAO" class="com.benchmark.ushers.dao.impl.UserDaoImpl">
+		<constructor-arg ref="dataSource" />
+	</bean>
+	<bean id="userRoleDAO" class="com.benchmark.ushers.dao.impl.UserRoleDaoImpl">
+		<constructor-arg ref="dataSource" />
+	</bean>
+	<bean id="governorateDAO" class="com.benchmark.ushers.dao.impl.GovernorateDaoImpl">
+		<constructor-arg ref="dataSource" />
+	</bean>
+	<bean id="areaDaoImpl" class="com.benchmark.ushers.dao.impl.AreaDaoImpl">
+		<constructor-arg ref="dataSource" />
+	</bean>
+	<bean id="preferredLocationDaoImpl" class="com.benchmark.ushers.dao.impl.PreferredLocationDaoImpl">
+		<constructor-arg ref="dataSource" />
+	</bean>
+	
+	<bean id="daoFacad" class="com.benchmark.ushers.service.DaoService" factory-method="getInstance"></bean>
+	
+</beans>
