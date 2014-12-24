@@ -31,8 +31,8 @@ public class DaoService {
 //	@Autowired  
 //	private ProjectDaoImpl projectDao;
 //	
-//	@Autowired  
-//	private UsherDaoImpl usherDao;
+	@Autowired  
+	private UsherDaoImpl usherDao;
 	
 	@Autowired  
 	private GovernorateDaoImpl governorateDaoImpl;
@@ -95,6 +95,10 @@ public class DaoService {
 	
 	public PreferredLocationDaoImpl getPreferredLocationDaoImpl(){
 		return preferredLocationDaoImpl;
+	}
+	
+	public UsherDaoImpl getUsherDaoImpl(){
+		return usherDao;
 	}
 //	public void storeProject(Project project){
 //		projectDao.save(project);

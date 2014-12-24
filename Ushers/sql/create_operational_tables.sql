@@ -106,7 +106,11 @@ CREATE TABLE ushers (
                    social_insurance_form_6 TINYINT default 0 ,
                    social_insurance_exit_date DATE default NULL ,
                    national_id_no varchar(50) default NULL ,
-                   additional_information text NOT NULL,
+                   additional_information text default NULL,
+                   photo1 BLOB ,
+                   photo2 BLOB ,
+                   photo3 BLOB ,
+                   photo4 BLOB ,
                    PRIMARY KEY  (usher_code)
                  ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
                  

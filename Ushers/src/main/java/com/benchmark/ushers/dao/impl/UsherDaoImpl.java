@@ -50,7 +50,7 @@ public class UsherDaoImpl extends JdbcRepository<Usher, String> {
 			usher.setAdditionalInformation(rs.getString("additional_information"));
 			usher.setAddress(rs.getString("address"));
 			usher.setAge(rs.getInt("age"));
-			usher.setBirthDate(DateUtil.getStringFromDateWithFormat(rs.getDate("birth_date")));
+			usher.setBirthDate(rs.getDate("birth_date"));
 			usher.setEmailAddress(rs.getString("email_address"));
 			usher.setFacebookAccount(rs.getString("facebook_account"));
 			usher.setFirstName(rs.getString("first_name"));
@@ -67,8 +67,8 @@ public class UsherDaoImpl extends JdbcRepository<Usher, String> {
 			usher.setSchool(rs.getString("school"));
 			usher.setShirtSize(rs.getString("shirt_size"));
 			usher.setSocialInsurance(rs.getBoolean("social_insurance"));
-			usher.setSocialInsuranceDate(DateUtil.getStringFromDateWithFormat(rs.getDate("social_insurance_date")));
-			usher.setSocialInsuranceExitDate(DateUtil.getStringFromDateWithFormat(rs.getDate("social_insurance_exit_date")));
+			usher.setSocialInsuranceDate(rs.getDate("social_insurance_date"));
+			usher.setSocialInsuranceExitDate(rs.getDate("social_insurance_exit_date"));
 			usher.setSocialInsuranceForm6(rs.getBoolean("social_insurance_form_6"));
 			usher.setSocialInsuranceNumber(rs.getString("social_insurance_no"));
 			usher.setUniversity(rs.getString("university"));
@@ -86,6 +86,10 @@ public class UsherDaoImpl extends JdbcRepository<Usher, String> {
 			usher.setLanguages(rs.getString("languages"));
 			usher.setUniversityDegree(rs.getString("university_degree"));
 			usher.setGraduationYear(rs.getString("graduation_year"));
+			usher.setPhoto1(rs.getBytes("photo1"));
+			usher.setPhoto2(rs.getBytes("photo2"));
+			usher.setPhoto3(rs.getBytes("photo3"));
+			usher.setPhoto4(rs.getBytes("photo4"));
 			usher.withPersisted(true);
 			return usher;
 		}
@@ -135,6 +139,10 @@ public class UsherDaoImpl extends JdbcRepository<Usher, String> {
 			columns.put("languages", usher.getLanguages());
 			columns.put("university_degree", usher.getUniversityDegree());
 			columns.put("graduation_year", usher.getGraduationYear());
+			columns.put("photo1", usher.getPhoto1());
+			columns.put("photo2", usher.getPhoto2());
+			columns.put("photo3", usher.getPhoto3());
+			columns.put("photo4", usher.getPhoto4());
 			return columns;
 		}
 	};

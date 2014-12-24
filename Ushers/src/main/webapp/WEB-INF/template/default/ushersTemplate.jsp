@@ -9,7 +9,7 @@
 <script src="<c:url value="/resources/js/main.js" />"></script>
 
 </head>
-<body>
+<body dir='rtl'>
 	<div class="page">
 		<tiles:insertAttribute name="header" />
 		<div class="content">

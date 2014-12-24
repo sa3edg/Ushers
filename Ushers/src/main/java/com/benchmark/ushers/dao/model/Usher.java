@@ -1,5 +1,7 @@
 package com.benchmark.ushers.dao.model;
 
+import java.util.Date;
+
 import org.springframework.data.domain.Persistable;
 
 public class Usher implements Persistable<String> {
@@ -18,10 +20,10 @@ public class Usher implements Persistable<String> {
 	private String middleName = "";
 	private String lastName= "";
 	private String maritalStatus = "";
-	private Boolean hasKids;
+	private boolean hasKids;
 	private Integer numberOfKids;
 	private String gender = "";
-	private String birthDate;
+	private Date birthDate;
 	private Integer age;
 	private String address = "";
 	private String appartmentNumber = "";
@@ -45,13 +47,19 @@ public class Usher implements Persistable<String> {
 	private String school = "";
 	private String facebookAccount = "";
 	private String emailAddress = "";
-	private Boolean socialInsurance;
+	private boolean socialInsurance;
 	private String socialInsuranceNumber = "";
-	private String socialInsuranceDate;
-	private Boolean socialInsuranceForm6;
-	private String socialInsuranceExitDate;
+	private Date socialInsuranceDate;
+	private boolean socialInsuranceForm6;
+	private Date socialInsuranceExitDate;
 	private String nationalIdNumber = "";
-	private String additionalInformation = "";	 
+	private String additionalInformation = "";
+	private byte[] photo1;
+	private byte[] photo2;
+	private byte[] photo3;
+	private byte[] photo4;
+	
+	//private String hasKidsString = "";
 
 	@Override
 	public String getId() {
@@ -100,11 +108,11 @@ public class Usher implements Persistable<String> {
 		this.gender = gender;
 	}
 
-	public String getBirthDate() {
+	public Date getBirthDate() {
 		return birthDate;
 	}
 
-	public void setBirthDate(String birthDate) {
+	public void setBirthDate(Date birthDate) {
 		this.birthDate = birthDate;
 	}
 
@@ -212,11 +220,11 @@ public class Usher implements Persistable<String> {
 		this.emailAddress = emailAddress;
 	}
 
-	public Boolean isSocialInsurance() {
+	public boolean isSocialInsurance() {
 		return socialInsurance;
 	}
 
-	public void setSocialInsurance(Boolean socialInsurance) {
+	public void setSocialInsurance(boolean socialInsurance) {
 		this.socialInsurance = socialInsurance;
 	}
 
@@ -228,27 +236,27 @@ public class Usher implements Persistable<String> {
 		this.socialInsuranceNumber = socialInsuranceNumber;
 	}
 
-	public String getSocialInsuranceDate() {
+	public Date getSocialInsuranceDate() {
 		return socialInsuranceDate;
 	}
 
-	public void setSocialInsuranceDate(String socialInsuranceDate) {
+	public void setSocialInsuranceDate(Date socialInsuranceDate) {
 		this.socialInsuranceDate = socialInsuranceDate;
 	}
 
-	public Boolean isSocialInsuranceForm6() {
+	public boolean isSocialInsuranceForm6() {
 		return socialInsuranceForm6;
 	}
 
-	public void setSocialInsuranceForm6(Boolean socialInsuranceForm6) {
+	public void setSocialInsuranceForm6(boolean socialInsuranceForm6) {
 		this.socialInsuranceForm6 = socialInsuranceForm6;
 	}
 
-	public String getSocialInsuranceExitDate() {
+	public Date getSocialInsuranceExitDate() {
 		return socialInsuranceExitDate;
 	}
 
-	public void setSocialInsuranceExitDate(String socialInsuranceExitDate) {
+	public void setSocialInsuranceExitDate(Date socialInsuranceExitDate) {
 		this.socialInsuranceExitDate = socialInsuranceExitDate;
 	}
 
@@ -300,11 +308,11 @@ public class Usher implements Persistable<String> {
 		this.maritalStatus = maritalStatus;
 	}
 
-	public Boolean isHasKids() {
+	public boolean isHasKids() {
 		return hasKids;
 	}
 
-	public void setHasKids(Boolean hasKids) {
+	public void setHasKids(boolean hasKids) {
 		this.hasKids = hasKids;
 	}
 
@@ -395,5 +403,37 @@ public class Usher implements Persistable<String> {
 
 	public void setHairType(String hairType) {
 		this.hairType = hairType;
+	}
+
+	public byte[] getPhoto1() {
+		return photo1;
+	}
+
+	public void setPhoto1(byte[] photo1) {
+		this.photo1 = photo1;
+	}
+
+	public byte[] getPhoto2() {
+		return photo2;
+	}
+
+	public void setPhoto2(byte[] photo2) {
+		this.photo2 = photo2;
+	}
+
+	public byte[] getPhoto3() {
+		return photo3;
+	}
+
+	public void setPhoto3(byte[] photo3) {
+		this.photo3 = photo3;
+	}
+
+	public byte[] getPhoto4() {
+		return photo4;
+	}
+
+	public void setPhoto4(byte[] photo4) {
+		this.photo4 = photo4;
 	}
 }

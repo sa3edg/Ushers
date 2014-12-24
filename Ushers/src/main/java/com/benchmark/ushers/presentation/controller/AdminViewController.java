@@ -26,6 +26,7 @@ import com.benchmark.ushers.common.security.PasswordHashProcessor;
 import com.benchmark.ushers.dao.model.Governorate;
 import com.benchmark.ushers.dao.model.User;
 import com.benchmark.ushers.dao.model.UserRole;
+import com.benchmark.ushers.dao.model.Usher;
 
 @Controller
 public class AdminViewController extends AbstractViewController{
@@ -52,6 +53,10 @@ public class AdminViewController extends AbstractViewController{
 			List<Governorate> governorates = daoService.getGovernorateDaoImpl().findAll();
 			model.addObject("governorates", governorates);
 			model.setViewName("dataEnttry/governorates");
+		}else if (request.isUserInRole(UserRole.USHER_ROLE)) {
+			List<Usher> ushers = daoService.getUsherDaoImpl().findAll();
+			model.addObject("ushers", ushers);
+			model.setViewName("ushers/ushers");
 		}
 		return model;
 
