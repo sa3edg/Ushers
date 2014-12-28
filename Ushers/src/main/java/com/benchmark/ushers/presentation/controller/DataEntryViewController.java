@@ -1,5 +1,6 @@
 package com.benchmark.ushers.presentation.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,8 +13,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.benchmark.ushers.dao.model.Area;
+import com.benchmark.ushers.dao.model.Client;
 import com.benchmark.ushers.dao.model.Governorate;
 import com.benchmark.ushers.dao.model.PreferredLocation;
+import com.benchmark.ushers.dao.model.Product;
+import com.benchmark.ushers.dao.model.Project;
+import com.benchmark.ushers.dao.model.ProjectType;
 import com.benchmark.ushers.dao.model.UserRole;
 
 @Controller
@@ -152,5 +157,203 @@ public class DataEntryViewController  extends AbstractViewController{
 		model.addObject("locations", locations);
 		model.setViewName("dataEnttry/preferredLocations");
 		return model;
+	}
+	
+	@RequestMapping(value = "/clients", method = RequestMethod.GET)
+	public ModelAndView getClients(HttpServletRequest request) {
+		ModelAndView model = new ModelAndView();
+		if (request.isUserInRole(UserRole.DATA_ENTRY_ROLE)) {
+			List<Client> areas = daoService.getClientDaoImpl().findAll();
+			model.addObject("clients", areas);
+			model.setViewName("dataEnttry/clients");
+		}
+		return model;
+
+	}
+	
+	@RequestMapping(value = "/addClientForm**", method = RequestMethod.GET)
+	public ModelAndView addClientForm() {
+		ModelAndView model = new ModelAndView();
+		model.addObject("client", new Client());
+		model.setViewName("dataEnttry/addClient");
+		return model;
+	}
+	
+	@RequestMapping(value ="/addClient", method = RequestMethod.POST)
+	public String addClient(@ModelAttribute("client") Client client) {
+		daoService.getClientDaoImpl().save(client);
+		return "redirect:/clients";
+	}
+	
+	@RequestMapping(value = "/editClient**", method = RequestMethod.GET)
+	public ModelAndView editClient(@RequestParam("id") String id) {
+		ModelAndView model = new ModelAndView();
+		Client client = daoService.getClientDaoImpl().findOne(new Integer(id));
+		model.addObject("client", client);
+		model.setViewName("dataEnttry/addClient");
+		return model;
+	}
+	
+	@RequestMapping("/deleteClient")
+	public ModelAndView deleteClient(@RequestParam("id") String id) {
+		daoService.getClientDaoImpl().delete(new Integer(id));
+		ModelAndView model = new ModelAndView();
+		List<Client> areas = daoService.getClientDaoImpl().findAll();
+		model.addObject("clients", areas);
+		model.setViewName("dataEnttry/clients");
+		return model;
+	}
+	
+	@RequestMapping(value = "/products", method = RequestMethod.GET)
+	public ModelAndView getProducts(HttpServletRequest request) {
+		ModelAndView model = new ModelAndView();
+		if (request.isUserInRole(UserRole.DATA_ENTRY_ROLE)) {
+			List<Product> areas = daoService.getProductDaoImpl().findAll();
+			model.addObject("products", areas);
+			model.setViewName("dataEnttry/products");
+		}
+		return model;
+
+	}
+	
+	@RequestMapping(value = "/addProductForm**", method = RequestMethod.GET)
+	public ModelAndView addProductForm() {
+		ModelAndView model = new ModelAndView();
+		model.addObject("product", new Product());
+		model.setViewName("dataEnttry/addProduct");
+		return model;
+	}
+	
+	@RequestMapping(value ="/addProduct", method = RequestMethod.POST)
+	public String addProduct(@ModelAttribute("product") Product product) {
+		daoService.getProductDaoImpl().save(product);
+		return "redirect:/products";
+	}
+	
+	@RequestMapping(value = "/editProduct**", method = RequestMethod.GET)
+	public ModelAndView editProduct(@RequestParam("id") String id) {
+		ModelAndView model = new ModelAndView();
+		Product client = daoService.getProductDaoImpl().findOne(new Integer(id));
+		model.addObject("product", client);
+		model.setViewName("dataEnttry/addProduct");
+		return model;
+	}
+	
+	@RequestMapping("/deleteProduct")
+	public ModelAndView deleteProduct(@RequestParam("id") String id) {
+		daoService.getProductDaoImpl().delete(new Integer(id));
+		ModelAndView model = new ModelAndView();
+		List<Product> areas = daoService.getProductDaoImpl().findAll();
+		model.addObject("products", areas);
+		model.setViewName("dataEnttry/products");
+		return model;
+	}
+	
+	@RequestMapping(value = "/projectTypes", method = RequestMethod.GET)
+	public ModelAndView getPrpjectTypes(HttpServletRequest request) {
+		ModelAndView model = new ModelAndView();
+		if (request.isUserInRole(UserRole.DATA_ENTRY_ROLE)) {
+			List<ProjectType> areas = daoService.getProjectTypeDaoImpl().findAll();
+			model.addObject("projectTypes", areas);
+			model.setViewName("dataEnttry/projectTypes");
+		}
+		return model;
+
+	}
+	
+	@RequestMapping(value = "/addProjectTypeForm**", method = RequestMethod.GET)
+	public ModelAndView addProjectTypeForm() {
+		ModelAndView model = new ModelAndView();
+		model.addObject("projectType", new ProjectType());
+		model.setViewName("dataEnttry/addProjectType");
+		return model;
+	}
+	
+	@RequestMapping(value ="/addProjectType", method = RequestMethod.POST)
+	public String addProjectType(@ModelAttribute("projectType") ProjectType projectType) {
+		daoService.getProjectTypeDaoImpl().save(projectType);
+		return "redirect:/projectTypes";
+	}
+	
+	@RequestMapping(value = "/editProjectType**", method = RequestMethod.GET)
+	public ModelAndView editProjectType(@RequestParam("id") String id) {
+		ModelAndView model = new ModelAndView();
+		ProjectType client = daoService.getProjectTypeDaoImpl().findOne(new Integer(id));
+		model.addObject("projectType", client);
+		model.setViewName("dataEnttry/addProduct");
+		return model;
+	}
+	
+	@RequestMapping("/deleteProjectType")
+	public ModelAndView deleteProjectType(@RequestParam("id") String id) {
+		daoService.getProjectTypeDaoImpl().delete(new Integer(id));
+		ModelAndView model = new ModelAndView();
+		List<ProjectType> areas = daoService.getProjectTypeDaoImpl().findAll();
+		model.addObject("projectTypes", areas);
+		model.setViewName("dataEnttry/projectTypes");
+		return model;
+	}
+	
+	@RequestMapping(value = "/projects", method = RequestMethod.GET)
+	public ModelAndView getPrpjects(HttpServletRequest request) {
+		ModelAndView model = new ModelAndView();
+		if (request.isUserInRole(UserRole.DATA_ENTRY_ROLE)) {
+			List<Project> areas = daoService.getProjectDaoImpl().findAll();
+			model.addObject("projects", areas);
+			model.setViewName("dataEnttry/projects");
+		}
+		return model;
+
+	}
+	
+	@RequestMapping(value = "/addProjectForm**", method = RequestMethod.GET)
+	public ModelAndView addProjectForm() {
+		ModelAndView model = new ModelAndView();
+		model.addObject("project", new Project());
+		model.setViewName("dataEnttry/addProject");
+		initModelList(model);
+		return model;
+	}
+	
+	@RequestMapping(value ="/addProject", method = RequestMethod.POST)
+	public String addProject(@ModelAttribute("project") Project project) {
+		daoService.storeProject(project);
+		return "redirect:/projects";
+	}
+	
+	@RequestMapping(value = "/editProject**", method = RequestMethod.GET)
+	public ModelAndView editProject(@RequestParam("id") String id) {
+		ModelAndView model = new ModelAndView();
+		Project client = daoService.getProjectDaoImpl().findOne(id);
+		model.addObject("project", client);
+		model.setViewName("dataEnttry/addProject");
+		return model;
+	}
+	
+	@RequestMapping("/deleteProject")
+	public ModelAndView deleteProject(@RequestParam("id") String id) {
+		daoService.getProjectDaoImpl().delete(id);
+		ModelAndView model = new ModelAndView();
+		List<Project> areas = daoService.getProjectDaoImpl().findAll();
+		model.addObject("projects", areas);
+		model.setViewName("dataEnttry/projects");
+		return model;
+	}
+	
+	private void initModelList(ModelAndView model) {
+		
+		// add project clients
+		List<Client> clients = daoService.getClientDaoImpl().findAll();
+		model.addObject("clients", clients);
+
+		// add project products
+		List<Product> products = daoService.getProductDaoImpl()
+				.findAll();
+		model.addObject("products", products);
+
+		// add project types
+		List<ProjectType> projectTypes = daoService
+				.getProjectTypeDaoImpl().findAll();
+		model.addObject("projectTypes", projectTypes);
 	}
 }

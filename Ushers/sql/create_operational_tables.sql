@@ -47,6 +47,32 @@ CREATE TABLE  preferred_locations (
 ) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 --end of add preferred_locations table
 
+--add clients table
+DROP TABLE IF EXISTS clients;
+CREATE TABLE  clients (
+  id int(20) NOT NULL AUTO_INCREMENT,
+  name varchar(200) NOT NULL,
+  PRIMARY KEY (id)
+) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+--end of add clients table
+
+--add products table
+DROP TABLE IF EXISTS products;
+CREATE TABLE  products (
+  id int(20) NOT NULL AUTO_INCREMENT,
+  name varchar(200) NOT NULL,
+  PRIMARY KEY (id)
+) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+--end of add products table
+
+--add project_types table
+DROP TABLE IF EXISTS project_types;
+CREATE TABLE  project_types (
+  id int(20) NOT NULL AUTO_INCREMENT,
+  name varchar(200) NOT NULL,
+  PRIMARY KEY (id)
+) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+--end of add project_types table
 
 DROP TABLE IF EXISTS users;
 CREATE TABLE users (
@@ -66,7 +92,7 @@ CREATE TABLE users (
 
 DROP TABLE IF EXISTS ushers;
 CREATE TABLE ushers (
-                   usher_code varchar(50) NOT NULL,
+                   usher_code varchar(7) NOT NULL,
                    usher_type varchar(50) NOT NULL ,
                    usher_caliber varchar(50) NOT NULL ,
                    first_name varchar(100) NOT NULL ,
@@ -107,6 +133,7 @@ CREATE TABLE ushers (
                    social_insurance_exit_date DATE default NULL ,
                    national_id_no varchar(50) default NULL ,
                    additional_information text default NULL,
+                   rate varchar(50) default NULL ,
                    photo1 BLOB ,
                    photo2 BLOB ,
                    photo3 BLOB ,
@@ -116,15 +143,14 @@ CREATE TABLE ushers (
                  
 DROP TABLE IF EXISTS projects;
 CREATE TABLE projects (
-                   project_id varchar(50) NOT NULLAUTO_INCREMENT,
-                   client varchar(50) NOT NULL ,
-                   product varchar(50) default NULL ,
-                   project_type varchar(50) default NULL ,
-                   project_name varchar(1) default NULL ,
-                   project_code varchar(50) default NULL ,
-                   project_start_date DATETIME default NULL ,
-                   project_end_date DATETIME default NULL ,
-                   year int(4) default 2014 ,
-                   PRIMARY KEY  (project_id)
+                   project_code varchar(7) NOT NULL,
+                   client_id varchar(50) NOT NULL ,
+                   product_id varchar(50) default NULL ,
+                   project_type_id varchar(50) default NULL ,
+                   project_name varchar(100) default NULL ,
+                   project_date DATE default NULL ,
+                   project_start_date DATE default NULL ,
+                   project_end_date DATE default NULL ,
+                   PRIMARY KEY  (project_code)
                  ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 ;;

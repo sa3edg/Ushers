@@ -3,13 +3,18 @@ package com.benchmark.ushers.presentation.controller;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -26,6 +31,11 @@ import com.benchmark.ushers.dao.model.Usher;
 @Controller
 public class UshersViewController extends AbstractViewController {
 
+	@InitBinder
+    public void initBinder(WebDataBinder binder) {
+        CustomDateEditor editor = new CustomDateEditor(new SimpleDateFormat("MM/dd/yyyy"), true);
+        binder.registerCustomEditor(Date.class, editor);
+    }
 	@RequestMapping(value = "/ushers", method = RequestMethod.GET)
 	public ModelAndView getGovernorates(HttpServletRequest request) {
 		ModelAndView model = new ModelAndView();
@@ -46,48 +56,45 @@ public class UshersViewController extends AbstractViewController {
 		initModelList(modelView);
 		return modelView;
 	}
+	
+	@RequestMapping(value = "/viewUsher", method = RequestMethod.GET)
+	public ModelAndView viewUsher(@RequestParam("id") String id) {
+		ModelAndView modelView = new ModelAndView();
+		modelView.addObject("usher", daoService.getUsherDaoImpl().findOne(id));
+		modelView.setViewName("ushers/usherProfile");
+		initModelList(modelView);
+		return modelView;
+	}
+
 
 	/**
 	 * Upload multiple file using Spring Controller
 	 */
 	@RequestMapping(value = "/addUsher", method = RequestMethod.POST)
-	public String addUsher(@RequestParam("name") String[] names,
-			@RequestParam("file") MultipartFile[] files) {
+	public String addUsher(@ModelAttribute("usher") Usher usher,
+			@RequestParam("file") MultipartFile[] files) throws Exception {
 
-		if (files.length != names.length)
-			return "Mandatory information missing";
-
-		String message = "";
 		for (int i = 0; i < files.length; i++) {
 			MultipartFile file = files[i];
-			String name = names[i];
-			try {
-				byte[] bytes = file.getBytes();
-
-				// Creating the directory to store file
-				String rootPath = System.getProperty("catalina.home");
-				File dir = new File(rootPath + File.separator + "tmpFiles");
-				if (!dir.exists())
-					dir.mkdirs();
-
-				// Create the file on server
-				File serverFile = new File(dir.getAbsolutePath()
-						+ File.separator + name);
-				BufferedOutputStream stream = new BufferedOutputStream(
-						new FileOutputStream(serverFile));
-				stream.write(bytes);
-				stream.close();
-
-				logger.info("Server File Location="
-						+ serverFile.getAbsolutePath());
-
-				message = message + "You successfully uploaded file=" + name
-						+ "<br />";
-			} catch (Exception e) {
-				return "You failed to upload " + name + " => " + e.getMessage();
+			byte[] bytes = file.getBytes();
+			switch (i) {
+			case 0:
+				usher.setPhoto1(bytes);
+				break;
+			case 1:
+				usher.setPhoto2(bytes);
+				break;
+			case 2:
+				usher.setPhoto3(bytes);
+				break;
+			case 3:
+				usher.setPhoto4(bytes);
+				break;
+			default:
 			}
 		}
-		return message;
+		daoService.storeUsher(usher);
+		return "redirect:/ushers";
 	}
 
 	private void initModelList(ModelAndView model) {
@@ -105,13 +112,100 @@ public class UshersViewController extends AbstractViewController {
 		ushersCaliber.add("Hypermarket B");
 		model.addObject("ushersCalibers", ushersCaliber);
 
-		// add ushers Caliber
+		// add ushers marital Status
 		List<String> maritalStatus = new ArrayList<String>();
 		maritalStatus.add("Married");
 		maritalStatus.add("Single");
 		maritalStatus.add("Widow");
 		maritalStatus.add("Divorced");
 		model.addObject("maritalStatus", maritalStatus);
+
+		// add ushers gender
+		List<String> gender = new ArrayList<String>();
+		gender.add("Male");
+		gender.add("Female");
+		model.addObject("gender", gender);
+
+		// add ushers areas
+		List<Area> areas = daoService.getAreaDaoImpl().findAll();
+		model.addObject("areas", areas);
+
+		// add ushers governorate
+		List<Governorate> governorates = daoService.getGovernorateDaoImpl()
+				.findAll();
+		model.addObject("governorates", governorates);
+
+		// add ushers preferred Locations
+		List<PreferredLocation> preferredLocations = daoService
+				.getPreferredLocationDaoImpl().findAll();
+		model.addObject("preferredLocations", preferredLocations);
+
+		// add ushers preferred Shifts
+		List<String> preferredShift = new ArrayList<String>();
+		preferredShift.add("Morning");
+		preferredShift.add("Night");
+		preferredShift.add("Between");
+		model.addObject("preferredShifts", preferredShift);
+
+		// add ushers preferred Shifts
+		List<String> shirtSizes = new ArrayList<String>();
+		shirtSizes.add("XS");
+		shirtSizes.add("S");
+		shirtSizes.add("M");
+		shirtSizes.add("L");
+		shirtSizes.add("XL");
+		shirtSizes.add("XXL");
+		shirtSizes.add("XXXL");
+		model.addObject("shirtSizes", shirtSizes);
+
+		// add ushers preferred Shifts
+		List<String> pantsSizes = new ArrayList<String>();
+		pantsSizes.add("XS");
+		pantsSizes.add("S");
+		pantsSizes.add("M");
+		pantsSizes.add("L");
+		pantsSizes.add("XL");
+		pantsSizes.add("XXL");
+		pantsSizes.add("XXXL");
+		model.addObject("pantsSizes", pantsSizes);
+
+		// add ushers preferred Shifts
+		List<String> hairTypes = new ArrayList<String>();
+		hairTypes.add("Normal");
+		hairTypes.add("Good");
+		hairTypes.add("Veiled");
+		model.addObject("hairTypes", hairTypes);
+
+		// add ushers preferred Shifts
+		List<String> languages = new ArrayList<String>();
+		languages.add("English");
+		languages.add("French");
+		languages.add("German");
+		languages.add("None");
+		model.addObject("languages", languages);
+
+		// add ushers preferred Shifts
+		List<String> universityDegrees = new ArrayList<String>();
+		universityDegrees.add("Graduate");
+		universityDegrees.add("Ungraduate");
+		model.addObject("universityDegrees", universityDegrees);
+
+		List<String> socialInsurance = new ArrayList<String>();
+		socialInsurance.add("Yes");
+		socialInsurance.add("No");
+		model.addObject("socialInsurance", socialInsurance);
+
+		List<String> socialInsuranceForm6 = new ArrayList<String>();
+		socialInsuranceForm6.add("Yes");
+		socialInsuranceForm6.add("No");
+		model.addObject("socialInsuranceForm6", socialInsuranceForm6);
+
+		List<String> rates = new ArrayList<String>();
+		rates.add("Poor");
+		rates.add("Good");
+		rates.add("Very good");
+		rates.add("Excellent");
+		model.addObject("rates", rates);
 	}
 
 }

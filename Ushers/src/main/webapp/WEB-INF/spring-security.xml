@@ -9,10 +9,10 @@
     <!-- enable use-expressions -->
     <http pattern="/addUser" security="none"></http>
 	<http auto-config="true" use-expressions="true">
-		<intercept-url pattern="/**admin**" access="hasRole('ROLE_ADMIN')" />
+		<!--  <intercept-url pattern="/**admin**" access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/**user**" access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/**usher**" access="hasRole('ROLE_USHER')" />
-		<intercept-url pattern="/**dataEntry**" access="hasRole('ROLE_DATAENTRY')" />
+		<intercept-url pattern="/**dataEntry**" access="hasRole('ROLE_DATAENTRY')" />-->
 		
 		<!-- access denied page -->
 		<access-denied-handler error-page="/403" />

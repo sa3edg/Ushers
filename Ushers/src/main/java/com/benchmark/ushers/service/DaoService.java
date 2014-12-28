@@ -14,9 +14,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.benchmark.ushers.dao.impl.AreaDaoImpl;
+import com.benchmark.ushers.dao.impl.ClientsDaoImpl;
 import com.benchmark.ushers.dao.impl.GovernorateDaoImpl;
 import com.benchmark.ushers.dao.impl.PreferredLocationDaoImpl;
+import com.benchmark.ushers.dao.impl.ProductsDaoImpl;
 import com.benchmark.ushers.dao.impl.ProjectDaoImpl;
+import com.benchmark.ushers.dao.impl.ProjectTypeDaoImpl;
 import com.benchmark.ushers.dao.impl.UserDaoImpl;
 import com.benchmark.ushers.dao.impl.UserRoleDaoImpl;
 import com.benchmark.ushers.dao.impl.UsherDaoImpl;
@@ -28,9 +31,9 @@ import com.benchmark.ushers.dao.model.Usher;
 @Service
 public class DaoService {
 	
-//	@Autowired  
-//	private ProjectDaoImpl projectDao;
-//	
+	@Autowired  
+	private ProjectDaoImpl projectDao;
+	
 	@Autowired  
 	private UsherDaoImpl usherDao;
 	
@@ -48,6 +51,15 @@ public class DaoService {
 	
 	@Autowired  
 	private UserDaoImpl userDao;
+	
+	@Autowired  
+	private ClientsDaoImpl clientDao;
+	
+	@Autowired  
+	private ProductsDaoImpl productDao;
+	
+	@Autowired  
+	private ProjectTypeDaoImpl projectTypeDao;
 	
 	private static volatile DaoService instance;
 	
@@ -100,9 +112,29 @@ public class DaoService {
 	public UsherDaoImpl getUsherDaoImpl(){
 		return usherDao;
 	}
-//	public void storeProject(Project project){
-//		projectDao.save(project);
-//	}
+	
+	public ClientsDaoImpl getClientDaoImpl(){
+		return clientDao;
+	}
+	
+	public ProductsDaoImpl getProductDaoImpl(){
+		return productDao;
+	}
+	
+	public ProjectTypeDaoImpl getProjectTypeDaoImpl(){
+		return projectTypeDao;
+	}
+	
+	public ProjectDaoImpl getProjectDaoImpl(){
+		return projectDao;
+	}
+	public void storeProject(Project project){
+		projectDao.save(project);
+	}
+	
+	public void storeUsher(Usher usher){
+		usherDao.save(usher);
+	}
 //	public List<Project> getAllProjects(){
 //		return projectDao.findAll();
 //	}
@@ -119,9 +151,7 @@ public class DaoService {
 //		projectDao.deleteAll();
 //	}
 //	
-//	public void storeUsher(Usher usher){
-//		usherDao.save(usher);
-//	}
+
 //	public List<Usher> getAllUshers(){
 //		return usherDao.findAll();
 //	}

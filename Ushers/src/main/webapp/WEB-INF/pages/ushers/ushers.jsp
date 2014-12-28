@@ -10,16 +10,18 @@
 			<sec:authorize access="hasRole('ROLE_USHER')">
 				<a href="<c:url value="addUsherForm" />"><spring:message
 						code="usher.addUsher" /></a>
-				<c:if test="${not empty areas}">
+				<c:if test="${not empty ushers}">
 				<c:set var="deleteConfirmation"><spring:message code="ushers.delecteConfirmation" /></c:set>
 					<div class="table-title">
 						<h3>Users</h3>
 					</div>
-					<display:table id="usherTable" pagesize="10" requestURI="" name="areas" class="CSSTableGenerator">
+					<display:table id="usherTable" pagesize="10" requestURI="" name="ushers" class="CSSTableGenerator">
 						<display:column property="usherCode" titleKey="usher.usherCode" ></display:column>
 						<display:column property="firstName" titleKey="usher.firstName" ></display:column>
 						<display:column property="middleName" titleKey="usher.middleName" ></display:column>
 						<display:column property="lastName" titleKey="usher.lastName" ></display:column>
+						<display:column><a href="<c:url value="/viewUsher?id=${usherTable.id}" />">
+				        <img src="<c:url value='/resources/images/profile.png'/>" width="30" height="30"  border="0" alt="Link to this page"> </a></display:column>
 						<display:column><a href="<c:url value="/editUsher?id=${usherTable.id}" />">
 				        <img src="<c:url value='/resources/images/edit.png'/>" width="30" height="30"  border="0" alt="Link to this page"> </a></display:column>
 						<display:column><a href="<c:url value="/deleteUsher?id=${usherTable.id}" />"

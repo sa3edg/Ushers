@@ -47,6 +47,7 @@ public class UsherDaoImpl extends JdbcRepository<Usher, String> {
 		public Usher mapRow(ResultSet rs, int rowNum) throws SQLException {
 			Usher usher = new Usher();
 			usher.setUsherCode(rs.getString("usher_code"));
+			usher.setUsherType(rs.getString("usher_type"));
 			usher.setAdditionalInformation(rs.getString("additional_information"));
 			usher.setAddress(rs.getString("address"));
 			usher.setAge(rs.getInt("age"));
@@ -55,7 +56,7 @@ public class UsherDaoImpl extends JdbcRepository<Usher, String> {
 			usher.setFacebookAccount(rs.getString("facebook_account"));
 			usher.setFirstName(rs.getString("first_name"));
 			usher.setGender(rs.getString("gender"));
-			usher.setHairType(rs.getString("hair_color"));
+			usher.setHairType(rs.getString("hair_type"));
 			usher.setHeight(rs.getString("height"));
 			usher.setLastName(rs.getString("last_name"));
 			usher.setMiddleName(rs.getString("middle_name"));
@@ -90,6 +91,7 @@ public class UsherDaoImpl extends JdbcRepository<Usher, String> {
 			usher.setPhoto2(rs.getBytes("photo2"));
 			usher.setPhoto3(rs.getBytes("photo3"));
 			usher.setPhoto4(rs.getBytes("photo4"));
+			usher.setRate(rs.getString("rate"));
 			usher.withPersisted(true);
 			return usher;
 		}
@@ -107,7 +109,7 @@ public class UsherDaoImpl extends JdbcRepository<Usher, String> {
 			columns.put("facebook_account", usher.getFacebookAccount());
 			columns.put("first_name", usher.getFirstName());
 			columns.put("gender", usher.getGender());
-			columns.put("hair_color", usher.getHairType());
+			columns.put("hair_type", usher.getHairType());
 			columns.put("height", usher.getHeight());
 			columns.put("last_name", usher.getLastName());
 			columns.put("middle_name", usher.getMiddleName());
@@ -124,7 +126,6 @@ public class UsherDaoImpl extends JdbcRepository<Usher, String> {
 			columns.put("social_insurance_form_6", usher.isSocialInsuranceForm6());
 			columns.put("social_insurance_no", usher.getSocialInsuranceNumber());
 			columns.put("university", usher.getUniversity());
-			columns.put("class", usher.getClass());
 			columns.put("weight", usher.getWeight());
 			columns.put("usher_caliber", usher.getUsherCaliber());
 			columns.put("marital_status", usher.getMaritalStatus());
@@ -139,10 +140,13 @@ public class UsherDaoImpl extends JdbcRepository<Usher, String> {
 			columns.put("languages", usher.getLanguages());
 			columns.put("university_degree", usher.getUniversityDegree());
 			columns.put("graduation_year", usher.getGraduationYear());
+			columns.put("usher_type", usher.getUsherType());
+			columns.put("rate", usher.getRate());
 			columns.put("photo1", usher.getPhoto1());
 			columns.put("photo2", usher.getPhoto2());
 			columns.put("photo3", usher.getPhoto3());
 			columns.put("photo4", usher.getPhoto4());
+			
 			return columns;
 		}
 	};

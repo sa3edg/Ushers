@@ -21,6 +21,18 @@ http://www.springframework.org/schema/beans/spring-beans-4.1.xsd">
 	<bean id="usherDao" class="com.benchmark.ushers.dao.impl.UsherDaoImpl">
 		<constructor-arg ref="dataSource" />
 	</bean>
+	<bean id="clientDao" class="com.benchmark.ushers.dao.impl.ClientsDaoImpl">
+		<constructor-arg ref="dataSource" />
+	</bean>
+	<bean id="productDao" class="com.benchmark.ushers.dao.impl.ProductsDaoImpl">
+		<constructor-arg ref="dataSource" />
+	</bean>
+	<bean id="projectTypeDao" class="com.benchmark.ushers.dao.impl.ProjectTypeDaoImpl">
+		<constructor-arg ref="dataSource" />
+	</bean>
+	<bean id="projectDao" class="com.benchmark.ushers.dao.impl.ProjectDaoImpl">
+		<constructor-arg ref="dataSource" />
+	</bean>
 	
 	<bean id="daoFacad" class="com.benchmark.ushers.service.DaoService" factory-method="getInstance"></bean>
 	

@@ -1,8 +1,10 @@
 package com.benchmark.ushers.dao.model;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.data.domain.Persistable;
+import org.springframework.web.multipart.MultipartFile;
 
 public class Usher implements Persistable<String> {
 
@@ -54,11 +56,13 @@ public class Usher implements Persistable<String> {
 	private Date socialInsuranceExitDate;
 	private String nationalIdNumber = "";
 	private String additionalInformation = "";
+	private String rate = "";
 	private byte[] photo1;
 	private byte[] photo2;
 	private byte[] photo3;
 	private byte[] photo4;
 	
+	private List<MultipartFile> files;
 	//private String hasKidsString = "";
 
 	@Override
@@ -435,5 +439,21 @@ public class Usher implements Persistable<String> {
 
 	public void setPhoto4(byte[] photo4) {
 		this.photo4 = photo4;
+	}
+
+	public String getRate() {
+		return rate;
+	}
+
+	public void setRate(String rate) {
+		this.rate = rate;
+	}
+
+	public List<MultipartFile> getFiles() {
+		return files;
+	}
+
+	public void setFiles(List<MultipartFile> files) {
+		this.files = files;
 	}
 }

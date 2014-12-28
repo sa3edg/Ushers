@@ -1,62 +1,39 @@
 package com.benchmark.ushers.dao.model;
 
+import java.util.Date;
+
 import org.springframework.data.domain.Persistable;
 
-public class Project implements Persistable<Integer>{
+public class Project implements Persistable<String>{
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private Integer id ;
-	private String client = "";
-	private String product = "";
-	private String projectType = "";
+	private String clientId = "";
+	private String productId = "";
+	private String projectTypeId = "";
 	private String projectName = "";
 	private String projectCode = "";
-	private String startDate = "";
-	private String endDate = "";
-	private int year;
+	private Date projectDate ;
+	private transient boolean persisted;
 	@Override
-	public Integer getId() {
+	public String getId() {
 		// TODO Auto-generated method stub
-		return id;
+		return getProjectCode();
 	}
 	
-	public void setId(Integer id){
-		this.id = id;
-	}
-
 	@Override
 	public boolean isNew() {
-		// TODO Auto-generated method stub
-		return false;
+		return !persisted;
+	}
+
+	public Project withPersisted(boolean persisted) {
+		this.persisted = persisted;
+		return this;
 	}
 	
-	public String getClient() {
-		return client;
-	}
-
-	public void setClient(String client) {
-		this.client = client;
-	}
-
-	public String getProduct() {
-		return product;
-	}
-
-	public void setProduct(String product) {
-		this.product = product;
-	}
-
-	public String getProjectType() {
-		return projectType;
-	}
-
-	public void setProjectType(String projectType) {
-		this.projectType = projectType;
-	}
 
 	public String getProjectName() {
 		return projectName;
@@ -74,28 +51,35 @@ public class Project implements Persistable<Integer>{
 		this.projectCode = projectCode;
 	}
 
-	public String getStartDate() {
-		return startDate;
+	public String getClientId() {
+		return clientId;
 	}
 
-	public void setStartDate(String startDate) {
-		this.startDate = startDate;
+	public void setClientId(String clientId) {
+		this.clientId = clientId;
 	}
 
-	public String getEndDate() {
-		return endDate;
+	public String getProductId() {
+		return productId;
 	}
 
-	public void setEndDate(String endDate) {
-		this.endDate = endDate;
+	public void setProductId(String productId) {
+		this.productId = productId;
 	}
 
-	public int getYear() {
-		return year;
+	public String getProjectTypeId() {
+		return projectTypeId;
 	}
 
-	public void setYear(int year) {
-		this.year = year;
+	public void setProjectTypeId(String projectTypeId) {
+		this.projectTypeId = projectTypeId;
 	}
 
+	public Date getProjectDate() {
+		return projectDate;
+	}
+
+	public void setProjectDate(Date projectDate) {
+		this.projectDate = projectDate;
+	}
 }
