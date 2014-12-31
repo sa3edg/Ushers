@@ -5,7 +5,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Ushers CMS</title>
 <link href="<c:url value="/resources/css/main.css" />" rel="stylesheet">
+<link href="<c:url value="/resources/css/styles.css" />" rel="stylesheet">
+<link href="<c:url value="/resources/css/jquery.lightbox-0.5.css" />" rel="stylesheet">
 <script src="<c:url value="/resources/js/jquery.1.10.2.min.js" />"></script>
+<script src="<c:url value="/resources/js/jquery.lightbox-0.5.min.js" />"></script>
 <script src="<c:url value="/resources/js/main.js" />"></script>
 
 </head>

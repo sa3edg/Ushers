@@ -3,12 +3,15 @@ package com.benchmark.ushers.presentation.controller;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
@@ -16,9 +19,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -32,10 +37,12 @@ import com.benchmark.ushers.dao.model.Usher;
 public class UshersViewController extends AbstractViewController {
 
 	@InitBinder
-    public void initBinder(WebDataBinder binder) {
-        CustomDateEditor editor = new CustomDateEditor(new SimpleDateFormat("MM/dd/yyyy"), true);
-        binder.registerCustomEditor(Date.class, editor);
-    }
+	public void initBinder(WebDataBinder binder) {
+		CustomDateEditor editor = new CustomDateEditor(new SimpleDateFormat(
+				"MM/dd/yyyy"), true);
+		binder.registerCustomEditor(Date.class, editor);
+	}
+
 	@RequestMapping(value = "/ushers", method = RequestMethod.GET)
 	public ModelAndView getGovernorates(HttpServletRequest request) {
 		ModelAndView model = new ModelAndView();
@@ -56,7 +63,7 @@ public class UshersViewController extends AbstractViewController {
 		initModelList(modelView);
 		return modelView;
 	}
-	
+
 	@RequestMapping(value = "/viewUsher", method = RequestMethod.GET)
 	public ModelAndView viewUsher(@RequestParam("id") String id) {
 		ModelAndView modelView = new ModelAndView();
@@ -65,7 +72,6 @@ public class UshersViewController extends AbstractViewController {
 		initModelList(modelView);
 		return modelView;
 	}
-
 
 	/**
 	 * Upload multiple file using Spring Controller
@@ -93,9 +99,30 @@ public class UshersViewController extends AbstractViewController {
 			default:
 			}
 		}
+		usher.setUsherCode("AC00011");
 		daoService.storeUsher(usher);
 		return "redirect:/ushers";
 	}
+
+	@RequestMapping(value = "/getProfileImage/{id}", method = RequestMethod.GET)
+	public void getProfileImage(@PathVariable("id") String id,
+			HttpServletResponse response, HttpServletRequest request)
+			throws ServletException, IOException {
+		Usher usher = daoService.getUsherDaoImpl().findOne(id);
+		if (usher != null && usher.getPhoto1() != null) {
+			response.setContentType("image/jpeg, image/jpg, image/png, image/gif");
+			response.setContentLength(usher.getPhoto1().length);
+			response.getOutputStream().write(usher.getPhoto1());
+			response.getOutputStream().close();
+			response.flushBuffer();
+		}
+	}
+
+	// private void initUsher(ModelAndView model, Usher usher) {
+	// byte[] encoded=Base64.encodeBase64(usher.getPhoto1());
+	// String encodedProfileImageString = new String(encoded);
+	// model.addObject("profilePic", encodedProfileImageString);
+	// }
 
 	private void initModelList(ModelAndView model) {
 		// add ushers types

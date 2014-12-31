@@ -276,6 +276,34 @@ body {
   text-decoration: none;
 }
 
+/**Usher profile table**/
+.usher {
+  table-layout: fixed;
+  width: 100%;
+  white-space: nowrap;
+}
+/* Column widths are based on these cells */
+.row-id {
+  width: 30%;
+}
+.row-value {
+  width: 70%;
+}
+.usher td {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.usher td{
+  text-align: right;
+  padding: 5px 10px;
+}
+.usher tr:nth-child(even) {
+  background: #E9E6F0;
+}
+.usher tr:nth-child(odd) {
+  background: #D9D0F2;
+}
 /*div.table-title {
    display: block;
   margin: auto;
