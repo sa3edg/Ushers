@@ -162,4 +162,8 @@ public class UsherDaoImpl extends JdbcRepository<Usher, String> {
 		entity.withPersisted(true);
 		return entity;
 	}
+	public String getLastUsherCode(){
+		Usher usher = jdbcTemplate.queryForObject("SELECT * FROM " + USHERS_TABLE_NAME + " ORDER BY usher_code DESC LIMIT 1", MAPPER);
+	    return usher.getUsherCode();
+	}
 }

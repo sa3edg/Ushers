@@ -36,17 +36,10 @@ import com.benchmark.ushers.dao.model.Usher;
 @Controller
 public class UshersViewController extends AbstractViewController {
 
-	@InitBinder
-	public void initBinder(WebDataBinder binder) {
-		CustomDateEditor editor = new CustomDateEditor(new SimpleDateFormat(
-				"MM/dd/yyyy"), true);
-		binder.registerCustomEditor(Date.class, editor);
-	}
-
 	@RequestMapping(value = "/ushers", method = RequestMethod.GET)
 	public ModelAndView getGovernorates(HttpServletRequest request) {
 		ModelAndView model = new ModelAndView();
-		if (request.isUserInRole(UserRole.USHER_ROLE)) {
+		if (request.isUserInRole(UserRole.ADMIN_ROLE) || request.isUserInRole(UserRole.SUPER_USER_ROLE) || request.isUserInRole(UserRole.USHER_ROLE)) {
 			List<Usher> ushers = daoService.getUsherDaoImpl().findAll();
 			model.addObject("ushers", ushers);
 			model.setViewName("ushers/ushers");
@@ -99,30 +92,56 @@ public class UshersViewController extends AbstractViewController {
 			default:
 			}
 		}
-		usher.setUsherCode("AC00011");
 		daoService.storeUsher(usher);
 		return "redirect:/ushers";
 	}
+	
+	@RequestMapping(value = "/editUsher**", method = RequestMethod.GET)
+	public ModelAndView editUsher(@RequestParam("id") String id) {
+		ModelAndView model = new ModelAndView();
+		Usher usher = daoService.getUsherDaoImpl().findOne(id);
+		model.addObject("usher", usher);
+		model.setViewName("ushers/addUsher");
+		initModelList(model);
+		return model;
+	}
+	
+	@RequestMapping("/deleteUsher")
+	public ModelAndView deleteUsher(@RequestParam("id") String id) {
+		daoService.getUsherDaoImpl().delete(id);
+		ModelAndView model = new ModelAndView();
+		List<Usher> ushers = daoService.getUsherDaoImpl().findAll();
+		model.addObject("ushers", ushers);
+		model.setViewName("ushers/ushers");
+		return model;
+	}
 
-	@RequestMapping(value = "/getProfileImage/{id}", method = RequestMethod.GET)
-	public void getProfileImage(@PathVariable("id") String id,
-			HttpServletResponse response, HttpServletRequest request)
+	@RequestMapping(value = "/getUsherImage/{id}/{index}", method = RequestMethod.GET)
+	public void getUsherImage(@PathVariable("id") String id,
+			@PathVariable("index") String index, HttpServletResponse response)
 			throws ServletException, IOException {
 		Usher usher = daoService.getUsherDaoImpl().findOne(id);
-		if (usher != null && usher.getPhoto1() != null) {
-			response.setContentType("image/jpeg, image/jpg, image/png, image/gif");
-			response.setContentLength(usher.getPhoto1().length);
-			response.getOutputStream().write(usher.getPhoto1());
-			response.getOutputStream().close();
-			response.flushBuffer();
+		if (usher != null) {
+			if ("0".equals(index) && usher.getPhoto1() != null) {
+				writeImage(response, usher.getPhoto1());
+			} else if ("1".equals(index) && usher.getPhoto2() != null) {
+				writeImage(response, usher.getPhoto2());
+			} else if ("2".equals(index) && usher.getPhoto3() != null) {
+				writeImage(response, usher.getPhoto3());
+			} else if ("3".equals(index) && usher.getPhoto4() != null) {
+				writeImage(response, usher.getPhoto4());
+			}
 		}
 	}
 
-	// private void initUsher(ModelAndView model, Usher usher) {
-	// byte[] encoded=Base64.encodeBase64(usher.getPhoto1());
-	// String encodedProfileImageString = new String(encoded);
-	// model.addObject("profilePic", encodedProfileImageString);
-	// }
+	private void writeImage(HttpServletResponse response, byte[] image)
+			throws IOException {
+		response.setContentType("image/jpeg, image/jpg, image/png, image/gif");
+		response.setContentLength(image.length);
+		response.getOutputStream().write(image);
+		response.getOutputStream().close();
+		response.flushBuffer();
+	}
 
 	private void initModelList(ModelAndView model) {
 		// add ushers types

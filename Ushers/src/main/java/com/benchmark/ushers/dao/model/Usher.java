@@ -13,6 +13,8 @@ public class Usher implements Persistable<String> {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	public static final String ACTIVATION = "Activiation";
+	public static final String INSTORE = "Instore";
 	private transient boolean persisted;
 
 	private String usherCode = "";

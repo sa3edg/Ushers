@@ -4,24 +4,43 @@
 <%@ taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
-<tiles:insertDefinition name="dataEntryTemplate">
+<tiles:insertDefinition name="defaultTemplate">
 	<tiles:putAttribute name="body">
 		<div class="body">
-			<sec:authorize access="hasRole('ROLE_DATAENTRY')">
+			<sec:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_SUPER_USER', 'ROLE_USHER', 'ROLE_DATAENTRY')">
 				<a href="<c:url value="addClientForm" />"><spring:message
 						code="clients.addClient" /></a>
 				<c:if test="${not empty clients}">
+				<sec:authorize access="hasAnyRole('ROLE_USHER', 'ROLE_DATAENTRY')">
 				<c:set var="deleteConfirmation"><spring:message code="ushers.delecteConfirmation" /></c:set>
 					<div class="table-title">
-						<h3>Users</h3>
+						<h3><spring:message code="menu.clients" /></h3>
 					</div>
 					<display:table id="clientsTable" pagesize="10" requestURI="" name="clients" class="CSSTableGenerator">
 						<display:column property="name" titleKey="ushers.name" ></display:column>
 						<display:column><a href="<c:url value="/editClient?id=${clientsTable.id}" />">
 				        <img src="<c:url value='/resources/images/edit.png'/>" width="30" height="30"  border="0" alt="Link to this page"> </a></display:column>
+						<sec:authorize access="hasRole('ROLE_ADMIN')">
 						<display:column><a href="<c:url value="/deleteClient?id=${clientsTable.id}" />"
-				        onClick="return confirmDelete('${deleteConfirmation}');"><img src="<c:url value='/resources/images/delete.png'/>" width="30" height="30"  border="0" alt="Link to this page"> </a></display:column>
+				        	onClick="return confirmDelete('${deleteConfirmation}');"><img src="<c:url value='/resources/images/delete.png'/>" width="30" height="30"  border="0" alt="Link to this page"> </a></display:column>
+					    </sec:authorize>
 					</display:table>
+					</sec:authorize>
+					<sec:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_SUPER_USER')">
+					<c:set var="deleteConfirmation"><spring:message code="ushers.delecteConfirmation" /></c:set>
+					<div class="table-title">
+						<h3><spring:message code="menu.clients" /></h3>
+					</div>
+					<display:table id="clientsTable" pagesize="10" requestURI="" name="clients" class="CSSTableGenerator" export="true">
+						<display:column property="name" titleKey="ushers.name" ></display:column>
+						<display:column><a href="<c:url value="/editClient?id=${clientsTable.id}" />">
+				        <img src="<c:url value='/resources/images/edit.png'/>" width="30" height="30"  border="0" alt="Link to this page"> </a></display:column>
+						<sec:authorize access="hasRole('ROLE_ADMIN')">
+						<display:column><a href="<c:url value="/deleteClient?id=${clientsTable.id}" />"
+				        	onClick="return confirmDelete('${deleteConfirmation}');"><img src="<c:url value='/resources/images/delete.png'/>" width="30" height="30"  border="0" alt="Link to this page"> </a></display:column>
+					    </sec:authorize>
+					</display:table>
+					</sec:authorize>
 				</c:if>
 			</sec:authorize>
 		</div>

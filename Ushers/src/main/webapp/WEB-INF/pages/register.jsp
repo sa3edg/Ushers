@@ -3,7 +3,7 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%> 
-<tiles:insertDefinition name="adminTemplate">
+<tiles:insertDefinition name="defaultTemplate">
 	<tiles:putAttribute name="body">
 		<div class="body">
 				<div style="text-align: center; padding: 30px; width: 850px;">

@@ -1,6 +1,7 @@
 package com.benchmark.ushers.dao.impl;
 
 import com.benchmark.ushers.dao.model.Project;
+import com.benchmark.ushers.dao.model.Usher;
 import com.nurkiewicz.jdbcrepository.JdbcRepository;
 import com.nurkiewicz.jdbcrepository.RowUnmapper;
 
@@ -18,12 +19,12 @@ import javax.sql.DataSource;
 @Repository
 public class ProjectDaoImpl extends JdbcRepository<Project, String> {
 
-	private static final String USHERS_TABLE_NAME = "projects";
+	private static final String PROJECTS_TABLE_NAME = "projects";
 	private JdbcTemplate jdbcTemplate;
 		
 	public ProjectDaoImpl(DataSource dataSource)
 	{
-		this(USHERS_TABLE_NAME);
+		this(PROJECTS_TABLE_NAME);
 		jdbcTemplate = new JdbcTemplate(dataSource);
 		setJdbcOperations(jdbcTemplate);
 	}
@@ -33,7 +34,7 @@ public class ProjectDaoImpl extends JdbcRepository<Project, String> {
 	}
 	public ProjectDaoImpl()
 	{
-		this(USHERS_TABLE_NAME);
+		this(PROJECTS_TABLE_NAME);
 	}
 	public void setDataSource(DataSource dataSource) {
 		jdbcTemplate = new JdbcTemplate(dataSource);
@@ -85,5 +86,10 @@ public class ProjectDaoImpl extends JdbcRepository<Project, String> {
 	protected <S extends Project> S postCreate(S entity, Number generatedId) {
 		entity.withPersisted(true);
 		return entity;
+	}
+	
+	public String getLastProjectrCode(){
+		Project project = jdbcTemplate.queryForObject("SELECT * FROM " + PROJECTS_TABLE_NAME + " ORDER BY usher_code DESC LIMIT 1", MAPPER);
+	    return project.getProjectCode();
 	}
 }

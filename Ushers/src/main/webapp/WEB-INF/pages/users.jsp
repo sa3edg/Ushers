@@ -4,7 +4,7 @@
 <%@ taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
-<tiles:insertDefinition name="adminTemplate">
+<tiles:insertDefinition name="defaultTemplate">
 	<tiles:putAttribute name="body">
 		<div class="body">
 		        <sec:authorize access="hasRole('ROLE_ADMIN')">
@@ -15,7 +15,7 @@
 					<div class="table-title">
 						<h3>Users</h3>
 					</div>
-					<display:table id="usersTable" pagesize="10" requestURI="" name="users" class="CSSTableGenerator">
+					<display:table id="usersTable" pagesize="10" requestURI="" name="users" class="CSSTableGenerator" export="true">
 						<display:column property="userName" titleKey="users.username" ></display:column>
 						<display:column property="role" titleKey="users.role" ></display:column>
 						<display:column><a href="<c:url value="/deleteUser?id=${usersTable.userName}" />"

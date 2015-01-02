@@ -9,21 +9,9 @@
         <put-attribute name="footer" value="/WEB-INF/template/default/footer.jsp" />
     </definition>
     
-    <definition name="adminTemplate" template="/WEB-INF/template/default/adminTemplate.jsp">
-        <put-attribute name="header" value="/WEB-INF/template/default/innerHeader.jsp" />
-        <put-attribute name="menu" value="/WEB-INF/template/default/adminMenu.jsp" />
-        <put-attribute name="footer" value="/WEB-INF/template/default/footer.jsp" />
-    </definition>
-    
-    <definition name="ushersTemplate" template="/WEB-INF/template/default/ushersTemplate.jsp">
-        <put-attribute name="header" value="/WEB-INF/template/default/innerHeader.jsp" />
-        <put-attribute name="menu" value="/WEB-INF/template/default/ushersMenu.jsp" />
-        <put-attribute name="footer" value="/WEB-INF/template/default/footer.jsp" />
-    </definition>
-    
-    <definition name="dataEntryTemplate" template="/WEB-INF/template/default/dataEntryTemplate.jsp">
-        <put-attribute name="header" value="/WEB-INF/template/default/innerHeader.jsp" />
-        <put-attribute name="menu" value="/WEB-INF/template/default/dataEntryMenu.jsp" />
+    <definition name="defaultTemplate" template="/WEB-INF/template/default/defaultTemplate.jsp">
+        <put-attribute name="header" value="/WEB-INF/template/default/header.jsp" />
+        <put-attribute name="menu" value="/WEB-INF/template/default/menu.jsp" />
         <put-attribute name="footer" value="/WEB-INF/template/default/footer.jsp" />
     </definition>
  

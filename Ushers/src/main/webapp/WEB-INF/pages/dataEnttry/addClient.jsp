@@ -3,10 +3,10 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%> 
-<tiles:insertDefinition name="dataEntryTemplate">
+<tiles:insertDefinition name="defaultTemplate">
 	<tiles:putAttribute name="body">
 		<div class="body">
-			<sec:authorize access="hasRole('ROLE_DATAENTRY')">
+			<sec:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_SUPER_USER', 'ROLE_USHER', 'ROLE_DATAENTRY')">
 				<div style="text-align: center; padding: 30px; width: 850px;">
 					<form:form method="post" action="addClient" modelAttribute="client">
 					    <c:set var="validateName"><spring:message code="ushers.valid.name" /></c:set>

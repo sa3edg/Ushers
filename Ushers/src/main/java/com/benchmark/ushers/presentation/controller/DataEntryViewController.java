@@ -1,6 +1,5 @@
 package com.benchmark.ushers.presentation.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -27,11 +26,9 @@ public class DataEntryViewController  extends AbstractViewController{
 	@RequestMapping(value = "/governorates", method = RequestMethod.GET)
 	public ModelAndView getGovernorates(HttpServletRequest request) {
 		ModelAndView model = new ModelAndView();
-		if (request.isUserInRole(UserRole.DATA_ENTRY_ROLE)) {
 			List<Governorate> governorates = daoService.getGovernorateDaoImpl().findAll();
 			model.addObject("governorates", governorates);
 			model.setViewName("dataEnttry/governorates");
-		}
 		return model;
 
 	}
@@ -72,11 +69,9 @@ public class DataEntryViewController  extends AbstractViewController{
 	@RequestMapping(value = "/areas", method = RequestMethod.GET)
 	public ModelAndView getAreas(HttpServletRequest request) {
 		ModelAndView model = new ModelAndView();
-		if (request.isUserInRole(UserRole.DATA_ENTRY_ROLE)) {
 			List<Area> areas = daoService.getAreaDaoImpl().findAll();
 			model.addObject("areas", areas);
 			model.setViewName("dataEnttry/areas");
-		}
 		return model;
 
 	}
@@ -162,11 +157,10 @@ public class DataEntryViewController  extends AbstractViewController{
 	@RequestMapping(value = "/clients", method = RequestMethod.GET)
 	public ModelAndView getClients(HttpServletRequest request) {
 		ModelAndView model = new ModelAndView();
-		if (request.isUserInRole(UserRole.DATA_ENTRY_ROLE)) {
 			List<Client> areas = daoService.getClientDaoImpl().findAll();
 			model.addObject("clients", areas);
 			model.setViewName("dataEnttry/clients");
-		}
+		
 		return model;
 
 	}
@@ -207,11 +201,9 @@ public class DataEntryViewController  extends AbstractViewController{
 	@RequestMapping(value = "/products", method = RequestMethod.GET)
 	public ModelAndView getProducts(HttpServletRequest request) {
 		ModelAndView model = new ModelAndView();
-		if (request.isUserInRole(UserRole.DATA_ENTRY_ROLE)) {
 			List<Product> areas = daoService.getProductDaoImpl().findAll();
 			model.addObject("products", areas);
 			model.setViewName("dataEnttry/products");
-		}
 		return model;
 
 	}
@@ -252,11 +244,10 @@ public class DataEntryViewController  extends AbstractViewController{
 	@RequestMapping(value = "/projectTypes", method = RequestMethod.GET)
 	public ModelAndView getPrpjectTypes(HttpServletRequest request) {
 		ModelAndView model = new ModelAndView();
-		if (request.isUserInRole(UserRole.DATA_ENTRY_ROLE)) {
+		
 			List<ProjectType> areas = daoService.getProjectTypeDaoImpl().findAll();
 			model.addObject("projectTypes", areas);
 			model.setViewName("dataEnttry/projectTypes");
-		}
 		return model;
 
 	}
@@ -297,11 +288,10 @@ public class DataEntryViewController  extends AbstractViewController{
 	@RequestMapping(value = "/projects", method = RequestMethod.GET)
 	public ModelAndView getPrpjects(HttpServletRequest request) {
 		ModelAndView model = new ModelAndView();
-		if (request.isUserInRole(UserRole.DATA_ENTRY_ROLE)) {
+		
 			List<Project> areas = daoService.getProjectDaoImpl().findAll();
 			model.addObject("projects", areas);
 			model.setViewName("dataEnttry/projects");
-		}
 		return model;
 
 	}

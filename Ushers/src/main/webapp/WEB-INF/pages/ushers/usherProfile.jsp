@@ -5,10 +5,10 @@
 	prefix="sec"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 
-<tiles:insertDefinition name="ushersTemplate">
+<tiles:insertDefinition name="defaultTemplate">
 	<tiles:putAttribute name="body">
 		<div class="body">
-			<sec:authorize access="hasRole('ROLE_USHER')">
+			<sec:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_SUPER_USER', 'ROLE_USHER')">
 				<div style="text-align: center; padding: 30px; width: 850px;">
 					<form:form method="post" action="" modelAttribute="usher">
 					<div id="thumbnails">
@@ -45,13 +45,13 @@
 						<table style="float: left;" >
 						<tr>
 								<td>
-									<li><a href="<c:url value='/getProfileImage/${usher.usherCode}'/>" > <img src="<c:url value='/getProfileImage/${usher.usherCode}'/>" width="320" height="200" border="0" onerror="this.src='<c:url value='/resources/images/default_profile.png'/>'" /> </a></li>
+									<li><a href="<c:url value='/getUsherImage/${usher.usherCode}/0'/>" > <img src="<c:url value='/getUsherImage/${usher.usherCode}/0'/>" width="320" height="200" border="0" onerror="this.src='<c:url value='/resources/images/default_profile.png'/>'" /> </a></li>
 								</td>
 							</tr>
 							<tr style="float: right;">
-								<td><li><a href="<c:url value='/getProfileImage/${usher.usherCode}'/>"><spring:message code="usher.photo2" /> </a>&nbsp;</li></td>
-								<td><li><a href="<c:url value='/getProfileImage/${usher.usherCode}'/>"><spring:message code="usher.photo3" /> </a>&nbsp;</li></td>
-								<td><li><a href="<c:url value='/getProfileImage/${usher.usherCode}'/>"><spring:message code="usher.photo4" /> </a>&nbsp;</li></td>
+								<td><li><a href="<c:url value='/getUsherImage/${usher.usherCode}/1'/>"><spring:message code="usher.photo2" /> </a>&nbsp;</li></td>
+								<td><li><a href="<c:url value='/getUsherImage/${usher.usherCode}/2'/>"><spring:message code="usher.photo3" /> </a>&nbsp;</li></td>
+								<td><li><a href="<c:url value='/getUsherImage/${usher.usherCode}/3'/>"><spring:message code="usher.photo4" /> </a>&nbsp;</li></td>
 							</tr>
 							</table>
 							</ul>

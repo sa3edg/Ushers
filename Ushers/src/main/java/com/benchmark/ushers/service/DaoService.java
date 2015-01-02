@@ -13,6 +13,7 @@ import java.util.concurrent.atomic.AtomicReference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.benchmark.ushers.common.util.UsherUtil;
 import com.benchmark.ushers.dao.impl.AreaDaoImpl;
 import com.benchmark.ushers.dao.impl.ClientsDaoImpl;
 import com.benchmark.ushers.dao.impl.GovernorateDaoImpl;
@@ -129,10 +130,14 @@ public class DaoService {
 		return projectDao;
 	}
 	public void storeProject(Project project){
+		String lastProjectCode = projectDao.getLastProjectrCode();
+		project.setProjectCode(UsherUtil.getNextProjectCode(lastProjectCode));
 		projectDao.save(project);
 	}
 	
 	public void storeUsher(Usher usher){
+		String lastUsherCode = usherDao.getLastUsherCode();
+		usher.setUsherCode(UsherUtil.getNextUsherCode(usher.getUsherType(), lastUsherCode));
 		usherDao.save(usher);
 	}
 //	public List<Project> getAllProjects(){

@@ -74,22 +74,7 @@ CREATE TABLE  project_types (
 ) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 --end of add project_types table
 
-DROP TABLE IF EXISTS users;
-CREATE TABLE users (
-                   uid  BIGINT NOT NULL ,
-                   user_name    text NOT NULL,
-                   name    text default NULL,
-                   first_name   text default NULL,
-                   middle_name   text default NULL,
-                   last_name   text default NULL,
-                   link   text default NULL,
-                   birthday   varchar(200) default NULL,
-                   gender     varchar(50) default NULL,
-                   location_id int(30) default 0,
-                   status     varchar(50) default NULL,
-                   PRIMARY KEY  (uid)
-                  ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-
+--add ushers table
 DROP TABLE IF EXISTS ushers;
 CREATE TABLE ushers (
                    usher_code varchar(7) NOT NULL,
@@ -140,7 +125,9 @@ CREATE TABLE ushers (
                    photo4 BLOB ,
                    PRIMARY KEY  (usher_code)
                  ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-                 
+--end ushers table
+
+--add projects table
 DROP TABLE IF EXISTS projects;
 CREATE TABLE projects (
                    project_code varchar(7) NOT NULL,
@@ -153,4 +140,5 @@ CREATE TABLE projects (
                    project_end_date DATE default NULL ,
                    PRIMARY KEY  (project_code)
                  ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+--add projects table
 ;;
