@@ -24,7 +24,6 @@ public class UshersExelExport extends AbstractExcelExporter{
 		
 		List<Usher> ushersList = (List<Usher>) model.get("ushers");
 		setExcelRows(excelSheet, ushersList);
-		
 	}
 
 	public void setExcelHeader(HSSFSheet excelSheet) {

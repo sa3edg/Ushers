@@ -3,6 +3,5 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 xsi:schemaLocation="http://www.springframework.org/schema/beans
 http://www.springframework.org/schema/beans/spring-beans-4.1.xsd">
 
-	<bean id="ushersExcelView" class="com.benchmark.ushers.service.excel.UshersExelExport">
-	</bean>
+	<bean id="ushersExcelView" class="com.benchmark.ushers.service.excel.UshersExelExport"></bean>
 </beans>

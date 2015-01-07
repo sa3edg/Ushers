@@ -4,6 +4,5 @@ import org.springframework.web.servlet.view.document.AbstractExcelView;
 public abstract class AbstractExcelExporter extends AbstractExcelView
 {
 	protected void excelHeaderStyle(){
-		
 	}
 }
