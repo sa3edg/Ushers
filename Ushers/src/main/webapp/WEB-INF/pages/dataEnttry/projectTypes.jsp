@@ -11,7 +11,6 @@
 				<a href="<c:url value="addAreaForm" />"><spring:message
 						code="areas.addarea" /></a>
 				<c:if test="${not empty projectTypes}">
-				<sec:authorize access="hasAnyRole('ROLE_USHER', 'ROLE_DATAENTRY')">
 				<c:set var="deleteConfirmation"><spring:message code="ushers.delecteConfirmation" /></c:set>
 					<div class="table-title">
 						<h3><spring:message code="menu.projectTypes" /></h3>
@@ -25,22 +24,6 @@
 				        onClick="return confirmDelete('${deleteConfirmation}');"><img src="<c:url value='/resources/images/delete.png'/>" width="30" height="30"  border="0" alt="Link to this page"> </a></display:column>
 						</sec:authorize>
 					</display:table>
-					</sec:authorize>
-					<sec:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_SUPER_USER')">
-						<c:set var="deleteConfirmation"><spring:message code="ushers.delecteConfirmation" /></c:set>
-					<div class="table-title">
-						<h3><spring:message code="menu.projectTypes" /></h3>
-					</div>
-					<display:table id="projectTypesTable" pagesize="10" requestURI="" name="projectTypes" class="CSSTableGenerator" export="true">
-						<display:column property="name" titleKey="ushers.name" ></display:column>
-						<display:column><a href="<c:url value="/editProjectType?id=${projectTypesTable.id}" />">
-				        <img src="<c:url value='/resources/images/edit.png'/>" width="30" height="30"  border="0" alt="Link to this page"> </a></display:column>
-						<sec:authorize access="hasRole('ROLE_ADMIN')">
-						<display:column><a href="<c:url value="/deleteProjectType?id=${projectTypesTable.id}" />"
-				        onClick="return confirmDelete('${deleteConfirmation}');"><img src="<c:url value='/resources/images/delete.png'/>" width="30" height="30"  border="0" alt="Link to this page"> </a></display:column>
-						</sec:authorize>
-					</display:table>
-					</sec:authorize>
 				</c:if>
 			</sec:authorize>
 		</div>

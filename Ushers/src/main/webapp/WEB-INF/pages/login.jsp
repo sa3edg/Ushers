@@ -4,7 +4,6 @@
 <tiles:insertDefinition name="loginTemplate">
 	<tiles:putAttribute name="body">
 		<div class="body-login" onload='document.loginForm.username.focus();'>
-			<h3>Enter your password</h3>
 			<c:if test="${not empty error}">
 				<div class="error">${error}</div>
 			</c:if>
@@ -14,6 +13,11 @@
 			<form name='loginForm'
 				action="<c:url value='/j_spring_security_check' />" method='POST'>
 				<table>
+				    <tr>
+						<td style="font-size: 20px;"><spring:message code="login.title" /></td>
+					</tr>
+					</br>
+					</br>
 					<tr>
 						<td><spring:message code="login.username" /></td>
 						<td><input type='text' name='username'></td>

@@ -70,6 +70,7 @@
             </list>
         </property>
     </bean>
+    <!-- end of Place Holder configuration -->
     
     <!-- Multipart Resolver -->
     <bean id="multipartResolver"
@@ -81,15 +82,12 @@
     </bean>
     <!-- End Multipart Resolver -->
     
-    <!-- end of Place Holder configuration -->
-     <!-- global exception mapping -->
-    <!-- <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
-		<property name="exceptionMappings">
-  		<map>
-    		<entry key="Exception" value="error" />
-  		</map>
-	</property>
-	<property name="defaultErrorView" value="error"/>
-	</bean>-->
-	<!-- end global exception mapping -->
+    <!-- Excel view Resolver -->
+    <bean class="org.springframework.web.servlet.view.XmlViewResolver">
+	   <property name="location">
+	       <value>/WEB-INF/spring-excel-views.xml</value>
+	   </property>
+	   <property name="order" value="0" />
+	</bean>
+    <!-- End Excel view Resolver -->
 </beans>

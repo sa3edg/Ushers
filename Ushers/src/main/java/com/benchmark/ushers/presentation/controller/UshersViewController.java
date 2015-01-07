@@ -116,6 +116,12 @@ public class UshersViewController extends AbstractViewController {
 		return model;
 	}
 
+	@RequestMapping(value = "/exportUshers", method = RequestMethod.GET)
+	public ModelAndView getExcel() {
+		List<Usher> ushers = daoService.getUsherDaoImpl().findAll();
+		return new ModelAndView("ushersExcelView", "ushers", ushers);
+	}
+
 	@RequestMapping(value = "/getUsherImage/{id}/{index}", method = RequestMethod.GET)
 	public void getUsherImage(@PathVariable("id") String id,
 			@PathVariable("index") String index, HttpServletResponse response)
@@ -222,7 +228,7 @@ public class UshersViewController extends AbstractViewController {
 		hairTypes.add("Veiled");
 		model.addObject("hairTypes", hairTypes);
 
-		// add ushers preferred Shifts
+		// add ushers languages
 		List<String> languages = new ArrayList<String>();
 		languages.add("English");
 		languages.add("French");
@@ -253,5 +259,4 @@ public class UshersViewController extends AbstractViewController {
 		rates.add("Excellent");
 		model.addObject("rates", rates);
 	}
-
 }

@@ -2,14 +2,7 @@ package com.benchmark.ushers.service;
 
 import java.util.List;
 
-
-
-
-
-
-
-import java.util.concurrent.atomic.AtomicReference;
-
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -130,15 +123,25 @@ public class DaoService {
 		return projectDao;
 	}
 	public void storeProject(Project project){
-		String lastProjectCode = projectDao.getLastProjectrCode();
-		project.setProjectCode(UsherUtil.getNextProjectCode(lastProjectCode));
-		projectDao.save(project);
+		if(StringUtils.isEmpty(project.getProjectCode())){
+			String lastProjectCode = projectDao.getLastProjectrCode();
+			project.setProjectCode(UsherUtil.getNextProjectCode(lastProjectCode));
+			projectDao.save(project);
+		}else{
+			projectDao.updateProject(project);
+		}
+		
 	}
 	
 	public void storeUsher(Usher usher){
-		String lastUsherCode = usherDao.getLastUsherCode();
-		usher.setUsherCode(UsherUtil.getNextUsherCode(usher.getUsherType(), lastUsherCode));
-		usherDao.save(usher);
+		if(StringUtils.isEmpty(usher.getUsherCode())){
+			String lastUsherCode = usherDao.getLastUsherCode();
+			usher.setUsherCode(UsherUtil.getNextUsherCode(usher.getUsherType(), lastUsherCode));
+			usherDao.save(usher);
+		}else{
+			usherDao.updateUsher(usher);
+		}
+		
 	}
 //	public List<Project> getAllProjects(){
 //		return projectDao.findAll();

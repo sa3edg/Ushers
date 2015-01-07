@@ -11,6 +11,9 @@
 					<form:form method="post" action="addProject" modelAttribute="project">
 					    <c:set var="validateName"><spring:message code="ushers.valid.name" /></c:set>
 						<table>
+						    <tr>
+						   	<td><form:hidden path="projectCode" /></td>
+						   </tr>
 							<tr>
 							    <td><form:label path="firstName"><spring:message code="usher.firstName"/></form:label></td>
 								<td><form:input path="firstName" /></td>

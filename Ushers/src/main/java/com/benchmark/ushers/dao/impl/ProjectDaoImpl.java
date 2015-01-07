@@ -89,7 +89,13 @@ public class ProjectDaoImpl extends JdbcRepository<Project, String> {
 	}
 	
 	public String getLastProjectrCode(){
-		Project project = jdbcTemplate.queryForObject("SELECT * FROM " + PROJECTS_TABLE_NAME + " ORDER BY usher_code DESC LIMIT 1", MAPPER);
-	    return project.getProjectCode();
+		if(count() > 0){
+			Project project = jdbcTemplate.queryForObject("SELECT * FROM " + PROJECTS_TABLE_NAME + " ORDER BY usher_code DESC LIMIT 1", MAPPER);
+			return project != null ? project.getProjectCode() : "";
+		}
+		return "";
+	}
+	public void updateProject(Project project){
+		update(project);
 	}
 }

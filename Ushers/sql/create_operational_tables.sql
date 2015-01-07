@@ -119,10 +119,10 @@ CREATE TABLE ushers (
                    national_id_no varchar(50) default NULL ,
                    additional_information text default NULL,
                    rate varchar(50) default NULL ,
-                   photo1 BLOB ,
-                   photo2 BLOB ,
-                   photo3 BLOB ,
-                   photo4 BLOB ,
+                   photo1 LONGBLOB ,
+                   photo2 LONGBLOB ,
+                   photo3 LONGBLOB ,
+                   photo4 LONGBLOB ,
                    PRIMARY KEY  (usher_code)
                  ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 --end ushers table

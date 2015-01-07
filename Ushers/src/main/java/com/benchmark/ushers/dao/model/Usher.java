@@ -63,9 +63,6 @@ public class Usher implements Persistable<String> {
 	private byte[] photo2;
 	private byte[] photo3;
 	private byte[] photo4;
-	
-	private List<MultipartFile> files;
-	//private String hasKidsString = "";
 
 	@Override
 	public String getId() {
@@ -76,7 +73,7 @@ public class Usher implements Persistable<String> {
 	public boolean isNew() {
 		return !persisted;
 	}
-
+	
 	public Usher withPersisted(boolean persisted) {
 		this.persisted = persisted;
 		return this;
@@ -450,12 +447,21 @@ public class Usher implements Persistable<String> {
 	public void setRate(String rate) {
 		this.rate = rate;
 	}
+	
+	@Override
+	public boolean equals(Object o) {
 
-	public List<MultipartFile> getFiles() {
-		return files;
+		Usher usher = (Usher) o;
+
+		if (usherCode != usher.usherCode) return false;
+		return usherCode.equals(usher.usherCode);
+
 	}
 
-	public void setFiles(List<MultipartFile> files) {
-		this.files = files;
+	@Override
+	public int hashCode() {
+		int result = usherCode != null ? usherCode.hashCode() : 0;
+		return result;
 	}
+
 }

@@ -1,7 +1,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://tiles.apache.org/tags-tiles" prefix="tiles"%>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
-<%@ taglib prefix="display" uri="http://displaytag.sf.net"%>
+<%@ taglib prefix="display" uri="http://displaytag.sf.net/el"%>
 <%@taglib prefix="sec"
 	uri="http://www.springframework.org/security/tags"%>
 <tiles:insertDefinition name="defaultTemplate">
@@ -15,7 +15,7 @@
 					<div class="table-title">
 						<h3>Users</h3>
 					</div>
-					<display:table id="usersTable" pagesize="10" requestURI="" name="users" class="CSSTableGenerator" export="true">
+					<display:table id="usersTable" pagesize="10" requestURI="/getUsers" name="users" class="CSSTableGenerator" >
 						<display:column property="userName" titleKey="users.username" ></display:column>
 						<display:column property="role" titleKey="users.role" ></display:column>
 						<display:column><a href="<c:url value="/deleteUser?id=${usersTable.userName}" />"

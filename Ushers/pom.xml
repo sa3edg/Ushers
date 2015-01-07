@@ -199,6 +199,13 @@
 		</dependency>
 		<!-- end apache file upload -->
 		
+		<!-- Excel library --> 
+   		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>3.6</version>
+   		</dependency>
+   		<!-- Excel library --> 
 		<!-- junit -->
 		<dependency>
 			<groupId>junit</groupId>

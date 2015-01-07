@@ -10,6 +10,8 @@
 			<sec:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_SUPER_USER', 'ROLE_USHER')">
 				<a href="<c:url value="addUsherForm" />"><spring:message
 						code="usher.addUsher" /></a>
+				<a href="<c:url value="exportUshers" />"><spring:message
+						code="usher.addUsher" /></a>
 				<c:if test="${not empty ushers}">
 				<sec:authorize access="hasAnyRole('ROLE_USHER', 'ROLE_DATAENTRY')">
 				<c:set var="deleteConfirmation"><spring:message code="ushers.delecteConfirmation" /></c:set>
@@ -36,7 +38,7 @@
 					<div class="table-title">
 						<h3><spring:message code="menu.ushers" /></h3>
 					</div>
-					<display:table id="usherTable" pagesize="10" requestURI="" name="ushers" class="CSSTableGenerator" eport="true">
+					<display:table id="usherTable" pagesize="10" requestURI="" name="ushers" class="CSSTableGenerator" export="true">
 						<display:column property="usherCode" titleKey="usher.usherCode" ></display:column>
 						<display:column property="firstName" titleKey="usher.firstName" ></display:column>
 						<display:column property="middleName" titleKey="usher.middleName" ></display:column>

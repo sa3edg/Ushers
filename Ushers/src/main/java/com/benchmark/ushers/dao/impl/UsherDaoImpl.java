@@ -11,7 +11,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import com.benchmark.ushers.common.util.DateUtil;
 import com.benchmark.ushers.dao.model.Usher;
 import com.nurkiewicz.jdbcrepository.JdbcRepository;
 import com.nurkiewicz.jdbcrepository.RowUnmapper;
@@ -163,7 +162,13 @@ public class UsherDaoImpl extends JdbcRepository<Usher, String> {
 		return entity;
 	}
 	public String getLastUsherCode(){
-		Usher usher = jdbcTemplate.queryForObject("SELECT * FROM " + USHERS_TABLE_NAME + " ORDER BY usher_code DESC LIMIT 1", MAPPER);
-	    return usher.getUsherCode();
+		if(count() > 0){
+			Usher usher = jdbcTemplate.queryForObject("SELECT * FROM " + USHERS_TABLE_NAME + " ORDER BY usher_code DESC LIMIT 1", MAPPER);
+			return usher != null ? usher.getUsherCode() : "";
+		}
+		return "";
+	}
+	public void updateUsher(Usher usher){
+		update(usher);
 	}
 }

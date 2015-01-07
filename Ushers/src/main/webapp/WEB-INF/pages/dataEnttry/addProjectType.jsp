@@ -12,9 +12,11 @@
 					    <c:set var="validateName"><spring:message code="ushers.valid.name" /></c:set>
 						<table>
 							<tr>
-							    <td><form:hidden path="id" /></td>
-							    <td><form:label path="name"><spring:message code="ushers.name"/></form:label></td>
-								<td><form:input path="name" styleId="name" id="name" /></td>
+						   	<td><form:hidden path="id" /></td>
+						   </tr>
+							<tr>
+							    <td><form:label path="name"><spring:message code="ushers.name"/></form:label><span class="required"/></td>
+								<td><form:input path="name" styleId="name" id="name"/></td>
 							</tr>
 							<tr>
 								<td><input type="submit" class="btn" onClick="return addObject('${validateName}');"

@@ -7,14 +7,16 @@
 	<tiles:putAttribute name="body">
 		<div class="body">
 			<sec:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_SUPER_USER', 'ROLE_USHER', 'ROLE_DATAENTRY')">
-				<div style="text-align: center; padding: 30px; width: 850px;">
+				<div style="text-align: right; padding: 30px; width: 850px;">
 					<form:form method="post" action="addArea" modelAttribute="area">
 					    <c:set var="validateName"><spring:message code="ushers.valid.name" /></c:set>
 						<table>
+						   <tr>
+						   	<td><form:hidden path="id" /></td>
+						   </tr>
 							<tr>
-							    <td><form:hidden path="id" /></td>
-							    <td><form:label path="name"><spring:message code="ushers.name"/></form:label></td>
-								<td><form:input path="name" styleId="name" id="name" /></td>
+							    <td><form:label path="name"><spring:message code="ushers.name"/></form:label><span class="required"/></td>
+								<td><form:input path="name" styleId="name" id="name"/></td>
 							</tr>
 							<tr>
 								<td><input type="submit" class="btn" onClick="return addObject('${validateName}');"
