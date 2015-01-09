@@ -16,12 +16,16 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.AbstractController;
 
 import com.benchmark.ushers.service.DaoService;
+import com.benchmark.ushers.service.csv.CSVImportService;
 
 public abstract class AbstractViewController extends AbstractController{
 	
 	@Autowired
 	protected DaoService daoService;
 
+	@Autowired
+	protected CSVImportService importCSVService;
+	
 	@Override
 	protected ModelAndView handleRequestInternal(HttpServletRequest arg0,
 			HttpServletResponse arg1) throws Exception {

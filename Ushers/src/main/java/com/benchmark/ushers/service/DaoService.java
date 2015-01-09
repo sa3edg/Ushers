@@ -3,7 +3,10 @@ package com.benchmark.ushers.service;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.benchmark.ushers.common.util.UsherUtil;
@@ -21,9 +24,14 @@ import com.benchmark.ushers.dao.model.Project;
 import com.benchmark.ushers.dao.model.User;
 import com.benchmark.ushers.dao.model.UserRole;
 import com.benchmark.ushers.dao.model.Usher;
+import com.benchmark.ushers.presentation.controller.AdminViewController;
 
 @Service
 public class DaoService {
+	private static final Logger logger = LoggerFactory.getLogger(DaoService.class);
+	
+	@Value("${excel.export.usher.sheetName}")
+    public String ushersSheetName;
 	
 	@Autowired  
 	private ProjectDaoImpl projectDao;

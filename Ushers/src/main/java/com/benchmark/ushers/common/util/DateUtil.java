@@ -6,6 +6,8 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
+
 public class DateUtil {
 	private static long DATE_OFFSET = 15*1000*60;
 	
@@ -105,9 +107,9 @@ public class DateUtil {
 	}
 	public static java.util.Date getSimpleDateFromString(String date) throws Exception
 	{
-		if(date== null || "".equals(date))
-			throw new IllegalArgumentException();
-		DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+		if(StringUtils.isEmpty(date) || "null".equals(date) || "NULL".equals(date))
+			return null;
+		DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 		return  formatter.parse(date);
 	}
 //	public static Date getDateFromString(String date) throws Exception

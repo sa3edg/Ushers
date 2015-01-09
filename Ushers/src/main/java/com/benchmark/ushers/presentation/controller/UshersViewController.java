@@ -13,6 +13,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,10 +34,16 @@ import com.benchmark.ushers.dao.model.Governorate;
 import com.benchmark.ushers.dao.model.PreferredLocation;
 import com.benchmark.ushers.dao.model.UserRole;
 import com.benchmark.ushers.dao.model.Usher;
+import com.benchmark.ushers.service.csv.CSVImportService;
+import com.benchmark.ushers.service.excel.ExcelExportHelperService;
+import com.benchmark.ushers.service.excel.UshersExelExportService;
 
 @Controller
 public class UshersViewController extends AbstractViewController {
 
+	@Autowired
+	protected ExcelExportHelperService excelExportHelperService;
+	
 	@RequestMapping(value = "/ushers", method = RequestMethod.GET)
 	public ModelAndView getGovernorates(HttpServletRequest request) {
 		ModelAndView model = new ModelAndView();
@@ -95,6 +103,18 @@ public class UshersViewController extends AbstractViewController {
 		daoService.storeUsher(usher);
 		return "redirect:/ushers";
 	}
+	@RequestMapping(value = "/importCSVForm**", method = RequestMethod.GET)
+	public ModelAndView importCSVForm() {
+		ModelAndView modelView = new ModelAndView();
+		modelView.setViewName("ushers/importUshers");
+		initModelList(modelView);
+		return modelView;
+	}
+	@RequestMapping(value = "/importCSV", method = RequestMethod.POST)
+	public String importCSV(@RequestParam("file") MultipartFile file) throws Exception {
+		importCSVService.importUsherCSVFile(file.getInputStream());
+		return "redirect:/ushers";
+	}
 	
 	@RequestMapping(value = "/editUsher**", method = RequestMethod.GET)
 	public ModelAndView editUsher(@RequestParam("id") String id) {
@@ -119,7 +139,11 @@ public class UshersViewController extends AbstractViewController {
 	@RequestMapping(value = "/exportUshers", method = RequestMethod.GET)
 	public ModelAndView getExcel() {
 		List<Usher> ushers = daoService.getUsherDaoImpl().findAll();
-		return new ModelAndView("ushersExcelView", "ushers", ushers);
+		ModelAndView model = new ModelAndView();
+		model.setViewName("ushersExcelView");
+		model.addObject("ushers", ushers);
+		model.addObject(UshersExelExportService.SERVICE_HELPER_KEY, excelExportHelperService);
+		return model;
 	}
 
 	@RequestMapping(value = "/getUsherImage/{id}/{index}", method = RequestMethod.GET)

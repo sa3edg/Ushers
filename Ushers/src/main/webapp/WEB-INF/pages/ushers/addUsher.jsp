@@ -70,6 +70,7 @@
                             <tr>
 							    <td><form:label path="birthDate"><spring:message code="usher.birthDate"/></form:label></td>
 								<td><form:input path="birthDate" styleId="birthDate"/></td>
+								<td><form:label path="birthDate"><spring:message code="usher.dateFormat"/></form:label></td>
 							</tr>
 							 <tr>
 							    <td><form:label path="age"><spring:message code="usher.age"/></form:label></td>
@@ -174,6 +175,7 @@
 							<tr>
 							    <td><form:label path="socialInsuranceDate"><spring:message code="usher.socialInsuranceDate"/></form:label></td>
 								<td><form:input path="socialInsuranceDate" styleId="socialInsuranceDate"/></td>
+								<td><form:label path="socialInsuranceDate"><spring:message code="usher.dateFormat"/></form:label></td>
 							</tr>
 							<tr>
                             	<td><form:label path="socialInsuranceForm6"><spring:message code="usher.socialInsuranceForm6"/></form:label></td>
@@ -182,6 +184,7 @@
                             <tr>
 							    <td><form:label path="socialInsuranceExitDate"><spring:message code="usher.socialInsuranceExitDate"/></form:label></td>
 								<td><form:input path="socialInsuranceExitDate"  styleId="socialInsuranceExitDate"/></td>
+								<td><form:label path="socialInsuranceExitDate"><spring:message code="usher.dateFormat"/></form:label></td>
 							</tr>
 							<tr>
 							    <td><form:label path="nationalIdNumber"><spring:message code="usher.nationalIdNumber"/></form:label><span class="required"/></td>
