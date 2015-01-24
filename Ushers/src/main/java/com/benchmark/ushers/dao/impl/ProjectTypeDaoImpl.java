@@ -18,7 +18,7 @@ import com.nurkiewicz.jdbcrepository.RowUnmapper;
 @Repository
 public class ProjectTypeDaoImpl extends JdbcRepository<ProjectType, Integer> {
 
-	private static final String TABLE_NAME = "project_type";
+	private static final String TABLE_NAME = "project_types";
 	private JdbcTemplate jdbcTemplate;
 	
 	public ProjectTypeDaoImpl()

@@ -1,46 +1,61 @@
 package com.benchmark.ushers.presentation.controller;
 
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import net.sf.dynamicreports.jasper.builder.JasperReportBuilder;
+import net.sf.dynamicreports.report.exception.DRException;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.benchmark.ushers.dao.model.Area;
 import com.benchmark.ushers.dao.model.Governorate;
 import com.benchmark.ushers.dao.model.PreferredLocation;
+import com.benchmark.ushers.dao.model.Product;
+import com.benchmark.ushers.dao.model.ProjectType;
 import com.benchmark.ushers.dao.model.UserRole;
 import com.benchmark.ushers.dao.model.Usher;
-import com.benchmark.ushers.service.csv.CSVImportService;
+import com.benchmark.ushers.dao.model.UsherReport;
+import com.benchmark.ushers.reports.ReportStatementBase;
+import com.benchmark.ushers.reports.UsherCodeReportStatement;
+import com.benchmark.ushers.service.ReportService;
 import com.benchmark.ushers.service.excel.ExcelExportHelperService;
 import com.benchmark.ushers.service.excel.UshersExelExportService;
 
 @Controller
 public class UshersViewController extends AbstractViewController {
 
+	//Parameters for reports
+	private static final String VALUE_TYPE_PDF = "pdf";
+	private static final String VALUE_TYPE_XLS = "xls";
+	
+	private static final Map<String, String> FILE_TYPE_2_CONTENT_TYPE = 
+			new HashMap<String, String>();
+	static {
+		FILE_TYPE_2_CONTENT_TYPE.put(VALUE_TYPE_PDF, "application/pdf");
+		FILE_TYPE_2_CONTENT_TYPE.put(VALUE_TYPE_XLS, "application/vnd.ms-excel");
+	}
+
+	@Autowired
+	private ReportService reportService;
+	
 	@Autowired
 	protected ExcelExportHelperService excelExportHelperService;
 	
@@ -164,6 +179,42 @@ public class UshersViewController extends AbstractViewController {
 		}
 	}
 
+	@RequestMapping("/exportReport")
+	public void exportUsher(@ModelAttribute("usherReport") UsherReport usherReport,
+			HttpServletRequest request, 
+			HttpServletResponse response) throws IOException, ServletException {
+		
+		String fileType = usherReport.getFileType();
+
+		ReportStatementBase reportStatement = createReportStatement(usherReport);
+		
+		
+		
+		response.setContentType(FILE_TYPE_2_CONTENT_TYPE.get(fileType));
+		OutputStream out = response.getOutputStream();
+		try {
+			JasperReportBuilder jrb = reportService.createJasperReport(reportStatement);
+			
+			if (VALUE_TYPE_PDF.equals(fileType)) {
+				jrb.toPdf(out);
+			} else if (VALUE_TYPE_XLS.equals(fileType)) {
+				jrb.toExcelApiXls(out);
+			}
+		} catch (DRException e) {
+			throw new ServletException(e);
+		}
+		out.close();
+	}
+	
+	@RequestMapping(value = "/showReportForm**", method = RequestMethod.GET)
+	public ModelAndView showReportForm() {
+		ModelAndView modelView = new ModelAndView();
+		modelView.addObject("usherReport", new UsherReport());
+		modelView.setViewName("ushers/usherReport");
+		initReportForm(modelView);
+		return modelView;
+	}
+	
 	private void writeImage(HttpServletResponse response, byte[] image)
 			throws IOException {
 		response.setContentType("image/jpeg, image/jpg, image/png, image/gif");
@@ -282,5 +333,63 @@ public class UshersViewController extends AbstractViewController {
 		rates.add("Very good");
 		rates.add("Excellent");
 		model.addObject("rates", rates);
+	}
+	
+	private void initReportForm(ModelAndView model) {
+		// initialize file types
+		List<String> fileTypes = new ArrayList<String>();
+		fileTypes.add("xls");
+		fileTypes.add("pdf");
+		model.addObject("fileTypes", fileTypes);
+		
+		// add project products
+		List<Product> products = daoService.getProductDaoImpl()
+				.findAll();
+		model.addObject("products", products);
+
+		// add project types
+		List<ProjectType> projectTypes = daoService
+				.getProjectTypeDaoImpl().findAll();
+		model.addObject("projectTypes", projectTypes);
+
+		// initialize report criteria 
+		initModelList(model);
+	}
+	
+	private ReportStatementBase createReportStatement(UsherReport usherReport) {
+		
+		String usherCodeItemValue = usherReport.getUsherCode();
+		String usherTypeItemValue = usherReport.getUsherType();
+		String usherCaliberItemValue = usherReport.getUsherCaliber();
+		String firstNameItemValue = usherReport.getFirstName();
+		String middleNameItemValue = usherReport.getMiddleName();
+		String lastNameItemValue = usherReport.getLastName();
+		String genderItemValue = usherReport.getGender();
+		String addressItemValue = usherReport.getAddress();
+		String appartmentNumberItemValue = usherReport.getAppartmentNumber();
+		String streetItemValue = usherReport.getStreet();
+		String governorateItemValue = usherReport.getGovernorate();
+		String preferredLocationItemValue = usherReport.getPreferredLocation();
+		String languagesItemValue = usherReport.getLanguages();
+		String universityItemValue = usherReport.getUniversity();
+		String socialInsuranceNumberItemValue = usherReport.getSocialInsuranceNumber();
+		Date socialInsuranceDateItemValue = usherReport.getSocialInsuranceDate();
+//		String usherCodeItemValue = usherReport.getForm6();//TODO
+		Date socialInsuranceExitDateItemValue = usherReport.getSocialInsuranceExitDate();
+		String productIdItemValue = usherReport.getProductId();
+		String projectCodeItemValue = usherReport.getProjectCode();
+		String projectNameItemValue = usherReport.getProjectName();
+		String projectTypeIdItemValue = usherReport.getProjectTypeId();
+		
+		ReportStatementBase reportStatement = null;
+		
+		if (usherCodeItemValue != null && usherCodeItemValue.equals(""))
+		{
+			reportStatement = new UsherCodeReportStatement(usherCodeItemValue); 
+		}
+		//TODO create more classes for the other reports 
+		
+		return reportStatement;
+		
 	}
 }

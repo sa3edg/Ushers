@@ -10,7 +10,7 @@
    <sec:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_SUPER_USER', 'ROLE_USHER')">
    		<li><a href="<c:url value="/ushers" />"><span><spring:message code="menu.ushers" /></span></a></li>
    		<li><a href="<c:url value="/supervisorUshers"/>"><span><spring:message code="menu.ushers.supervisor" /></span></a></li>
-   		<li><a href='#'><span><spring:message code="menu.reports" /></span></a></li>
+   		<li><a href="<c:url value="/showReportForm" />"><span><spring:message code="menu.reports" /></span></a></li>
    </sec:authorize>
    <li class='active has-sub'><a href='#'><span><spring:message code="menu.timesheet" /></span></a>
    		<ul>

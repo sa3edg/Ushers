@@ -37,4 +37,8 @@ http://www.springframework.org/schema/beans/spring-beans-4.1.xsd">
 	<bean id="daoFacad" class="com.benchmark.ushers.service.DaoService" factory-method="getInstance"></bean>
 	<bean id="excelExportHelperService" class="com.benchmark.ushers.service.excel.ExcelExportHelperService" factory-method="getInstance"></bean>
 	<bean id="csvImportService" class="com.benchmark.ushers.service.csv.CSVImportService" factory-method="getInstance"></bean>
+	
+	<bean id="reportService" class="com.benchmark.ushers.service.ReportService">
+		<constructor-arg ref="dataSource" /> 
+	</bean>
 </beans>
