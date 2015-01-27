@@ -8,8 +8,8 @@
 	<tiles:putAttribute name="body">
 		<div class="body">
 			<sec:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_SUPER_USER', 'ROLE_USHER', 'ROLE_DATAENTRY')">
-				<a href="<c:url value="addAreaForm" />"><spring:message
-						code="areas.addarea" /></a>
+				<a href="<c:url value="addProjectTypeForm" />"><spring:message
+						code="projectTypes.addProjectType" /></a>
 				<c:if test="${not empty projectTypes}">
 				<c:set var="deleteConfirmation"><spring:message code="ushers.delecteConfirmation" /></c:set>
 					<div class="table-title">

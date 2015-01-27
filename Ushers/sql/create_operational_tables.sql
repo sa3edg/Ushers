@@ -132,13 +132,39 @@ DROP TABLE IF EXISTS projects;
 CREATE TABLE projects (
                    project_code varchar(7) NOT NULL,
                    client_id varchar(50) NOT NULL ,
-                   product_id varchar(50) default NULL ,
-                   project_type_id varchar(50) default NULL ,
-                   project_name varchar(100) default NULL ,
+                   product_id varchar(50) NOT NULL ,
+                   project_type_id varchar(50) NOT NULL ,
+                   project_name varchar(100) NOT NULL ,
                    project_date DATE default NULL ,
                    project_start_date DATE default NULL ,
                    project_end_date DATE default NULL ,
                    PRIMARY KEY  (project_code)
                  ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
---add projects table
+--end projects table
+
+ --add projects_locations table
+DROP TABLE IF EXISTS projects_locations;
+CREATE TABLE  projects_locations (
+  id int(20) NOT NULL AUTO_INCREMENT,
+  name varchar(200) NOT NULL,
+  location_type varchar(50) NOT NULL,
+  PRIMARY KEY (id)
+) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+--end of add projects_locations table
+
+--add ushers_time_sheet table
+DROP TABLE IF EXISTS ushers_time_sheet;
+CREATE TABLE ushers_time_sheet (
+                   id int(20) NOT NULL AUTO_INCREMENT,
+                   project_id varchar(7) NOT NULL,
+                   project_location_id varchar(7) NOT NULL,
+                   usher_code varchar(7) NOT NULL,
+                   deduction float default 0 ,
+                   debit int(5) default 0 ,
+                   sheet_date DATE default NULL ,
+                   uniform_delivered TINYINT default 0 ,
+                   PRIMARY KEY  (id)
+                 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+--end ushers_time_sheet table
+
 ;;

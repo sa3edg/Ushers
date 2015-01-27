@@ -14,8 +14,10 @@
    </sec:authorize>
    <li class='active has-sub'><a href='#'><span><spring:message code="menu.timesheet" /></span></a>
    		<ul>
-        	<li class='last'><a href='#'><span><spring:message code="menu.ushers.timesheet" /></span></a></li>
-        	<li class='last'><a href='#'><span><spring:message code="menu.superUshers.timesheet" /></span></a></li>
+   		    <li class='last'><a href="<c:url value="/usherTimeSheets"/>"><span><spring:message code="menu.ushers.timesheetEntry" /></span></a></li>
+        	<li class='last'><a href="<c:url value="/showUsherTimeSheetCriteria"/>"><span><spring:message code="menu.ushers.timesheetReport" /></span></a></li>
+        	<li class='last'><a href="<c:url value="/projects"/>"><span><spring:message code="menu.superUshers.timesheetEntry" /></span></a></li>
+        	<li class='last'><a href="<c:url value="/projects"/>"><span><spring:message code="menu.superUshers.timesheetReport" /></span></a></li>
         </ul>
    </li>
    <li class='active has-sub'><a href='#'><span><spring:message code="menu.projectDate" /></span></a>
@@ -24,6 +26,7 @@
         	<li class='last'><a href="<c:url value="/clients"/>"><span><spring:message code="menu.clients" /></span></a></li>
         	<li class='last'><a href="<c:url value="/products"/>"><span><spring:message code="menu.products" /></span></a></li>
         	<li class='last'><a href="<c:url value="/projectTypes"/>"><span><spring:message code="menu.projectTypes" /></span></a></li>
+        	<li class='last'><a href="<c:url value="projectLocations"/>"><span><spring:message code="menu.projectLocations" /></span></a></li>
         </ul>
    </li>
    <li class='active has-sub'><a href='#'><span><spring:message code="menu.ushersData" /></span></a>

@@ -15,8 +15,8 @@
 						   	<td><form:hidden path="projectCode" /></td>
 						   </tr>
 							<tr>
-							    <td><form:label path="firstName"><spring:message code="usher.firstName"/></form:label></td>
-								<td><form:input path="firstName" /></td>
+							    <td><form:label path="projectName"><spring:message code="projects.projectName"/></form:label></td>
+								<td><form:input path="projectName" styleId="name" id="name"/></td>
 							</tr>
 							 <tr>
                             	<td><form:label path="clientId"><spring:message code="projects.projectClient"/></form:label></td>
@@ -33,6 +33,7 @@
                             <tr>
 							    <td><form:label path="projectDate"><spring:message code="projects.projectDate"/></form:label></td>
 								<td><form:input path="projectDate" /></td>
+								<td><form:label path="projectDate"><spring:message code="usher.dateFormat"/></form:label></td>
 							</tr>
 							<tr>
 								<td><input type="submit" class="btn"

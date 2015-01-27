@@ -1,9 +1,11 @@
 package com.benchmark.ushers.presentation.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +19,7 @@ import com.benchmark.ushers.dao.model.Governorate;
 import com.benchmark.ushers.dao.model.PreferredLocation;
 import com.benchmark.ushers.dao.model.Product;
 import com.benchmark.ushers.dao.model.Project;
+import com.benchmark.ushers.dao.model.ProjectLocation;
 import com.benchmark.ushers.dao.model.ProjectType;
 import com.benchmark.ushers.dao.model.UserRole;
 
@@ -345,5 +348,63 @@ public class DataEntryViewController  extends AbstractViewController{
 		List<ProjectType> projectTypes = daoService
 				.getProjectTypeDaoImpl().findAll();
 		model.addObject("projectTypes", projectTypes);
+	}
+	
+	@RequestMapping(value = "/projectLocations", method = RequestMethod.GET)
+	public ModelAndView getProjectLocations(HttpServletRequest request) {
+		ModelAndView model = new ModelAndView();
+		List<ProjectLocation> ProjectLocations = daoService
+				.getProjectLocationDaoImpl().findAll();
+		model.addObject("ProjectLocations", ProjectLocations);
+		model.setViewName("dataEnttry/ProjectLocations");
+		return model;
+
+	}
+
+	@RequestMapping(value = "/addProjectLocationForm**", method = RequestMethod.GET)
+	public ModelAndView addProjectLocationForm() {
+		ModelAndView model = new ModelAndView();
+		model.addObject("ProjectLocation", new ProjectLocation());
+		model.setViewName("dataEnttry/addProjectLocation");
+		initProjectLocation(model);
+		return model;
+	}
+
+	@RequestMapping(value = "/addProjectLocation", method = RequestMethod.POST)
+	public String addProjectLocation(
+			@ModelAttribute("ProjectLocation") ProjectLocation ProjectLocation) {
+		daoService.getProjectLocationDaoImpl().save(ProjectLocation);
+		return "redirect:/projectLocations";
+	}
+
+	@RequestMapping(value = "/editProjectLocation**", method = RequestMethod.GET)
+	public ModelAndView editProjectLocation(@RequestParam("id") String id) {
+		ModelAndView model = new ModelAndView();
+		ProjectLocation ProjectLocation = daoService
+				.getProjectLocationDaoImpl().findOne(new Integer(id));
+		model.addObject("ProjectLocation", ProjectLocation);
+		model.setViewName("dataEnttry/addProjectLocation");
+		return model;
+	}
+
+	@RequestMapping("/deleteProjectLocation")
+	public ModelAndView deleteProjectLocation(@RequestParam("id") String id) {
+		daoService.getProjectLocationDaoImpl().delete(new Integer(id));
+		ModelAndView model = new ModelAndView();
+		List<ProjectLocation> ProjectLocations = daoService
+				.getProjectLocationDaoImpl().findAll();
+		model.addObject("ProjectLocations", ProjectLocations);
+		model.setViewName("dataEnttry/ProjectLocations");
+		return model;
+	}
+
+	private void initProjectLocation(ModelAndView model) {
+		// add ushers types
+		List<String> types = new ArrayList<String>();
+		types.add("Smalls stores A");
+		types.add("Small stores B");
+		types.add("Hypermarket A");
+		types.add("Hypermarket B");
+		model.addObject("types", types);
 	}
 }

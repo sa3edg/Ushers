@@ -112,12 +112,5 @@ public class DateUtil {
 		DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 		return  formatter.parse(date);
 	}
-//	public static Date getDateFromString(String date) throws Exception
-//	{
-//		if(date== null || "".equals(date))
-//			return null;
-//		DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss", Locale.ENGLISH);
-//		return  new Date(formatter.parse(date).getTime());
-//	}
 
 }

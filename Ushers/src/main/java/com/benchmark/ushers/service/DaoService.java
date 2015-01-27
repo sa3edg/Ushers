@@ -16,10 +16,12 @@ import com.benchmark.ushers.dao.impl.GovernorateDaoImpl;
 import com.benchmark.ushers.dao.impl.PreferredLocationDaoImpl;
 import com.benchmark.ushers.dao.impl.ProductsDaoImpl;
 import com.benchmark.ushers.dao.impl.ProjectDaoImpl;
+import com.benchmark.ushers.dao.impl.ProjectLocationDaoImpl;
 import com.benchmark.ushers.dao.impl.ProjectTypeDaoImpl;
 import com.benchmark.ushers.dao.impl.UserDaoImpl;
 import com.benchmark.ushers.dao.impl.UserRoleDaoImpl;
 import com.benchmark.ushers.dao.impl.UsherDaoImpl;
+import com.benchmark.ushers.dao.impl.UsherTimeSheetDaoImpl;
 import com.benchmark.ushers.dao.model.Project;
 import com.benchmark.ushers.dao.model.User;
 import com.benchmark.ushers.dao.model.UserRole;
@@ -62,6 +64,12 @@ public class DaoService {
 	
 	@Autowired  
 	private ProjectTypeDaoImpl projectTypeDao;
+	
+	@Autowired  
+	private ProjectLocationDaoImpl projectLocationDao;
+	
+	@Autowired  
+	private UsherTimeSheetDaoImpl usherTimeSheetDao;
 	
 	private static volatile DaoService instance;
 	
@@ -150,6 +158,14 @@ public class DaoService {
 			usherDao.updateUsher(usher);
 		}
 		
+	}
+	
+	public ProjectLocationDaoImpl getProjectLocationDaoImpl(){
+		return projectLocationDao;
+	}
+	
+	public UsherTimeSheetDaoImpl getUsherTimeSheetDaoImpl(){
+		return usherTimeSheetDao;
 	}
 //	public List<Project> getAllProjects(){
 //		return projectDao.findAll();

@@ -61,12 +61,12 @@ public class ProjectDaoImpl extends JdbcRepository<Project, String> {
 		public Map<String, Object> mapColumns(Project comment) {
 			Map<String, Object> mapping = new LinkedHashMap<String, Object>();
 			try{
-			mapping.put("client", comment.getClientId());
-			mapping.put("product", comment.getProductId());
+			mapping.put("client_id", comment.getClientId());
+			mapping.put("product_id", comment.getProductId());
 			mapping.put("project_name", comment.getProjectName());
 			mapping.put("project_code", comment.getProjectCode());
-			mapping.put("project_type", comment.getProjectTypeId());
-			mapping.put("project_start_date", comment.getProjectDate());
+			mapping.put("project_type_id", comment.getProjectTypeId());
+			mapping.put("project_date", comment.getProjectDate());
 			return mapping;
 			}
 			catch(Exception ex){
@@ -90,7 +90,7 @@ public class ProjectDaoImpl extends JdbcRepository<Project, String> {
 	
 	public String getLastProjectrCode(){
 		if(count() > 0){
-			Project project = jdbcTemplate.queryForObject("SELECT * FROM " + PROJECTS_TABLE_NAME + " ORDER BY usher_code DESC LIMIT 1", MAPPER);
+			Project project = jdbcTemplate.queryForObject("SELECT * FROM " + PROJECTS_TABLE_NAME + " ORDER BY project_code DESC LIMIT 1", MAPPER);
 			return project != null ? project.getProjectCode() : "";
 		}
 		return "";
