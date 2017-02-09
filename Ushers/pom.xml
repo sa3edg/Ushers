@@ -47,7 +47,7 @@
 			<artifactId>spring-web</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
-
+		
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
@@ -137,12 +137,17 @@
 	    </dependency>
 	    
 	    <!-- display tag lib -->
-	    <dependency>
+    	<!--<dependency>
+            <groupId>com.bdot</groupId>
+            <artifactId>displaytag-header-patch</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>-->
+        <dependency>
         	<groupId>displaytag</groupId>
       		<artifactId>displaytag</artifactId>
       		<version>1.2</version>
     	</dependency>
-    	
     	<!-- display tag lib -->
 	    <dependency>
 	    	<groupId>displaytag</groupId>

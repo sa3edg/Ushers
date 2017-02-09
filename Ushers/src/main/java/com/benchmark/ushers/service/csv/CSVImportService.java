@@ -6,18 +6,24 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import au.com.bytecode.opencsv.CSVReader;
+import au.com.bytecode.opencsv.bean.ColumnPositionMappingStrategy;
+import au.com.bytecode.opencsv.bean.CsvToBean;
 
 import com.benchmark.ushers.common.util.DateUtil;
 import com.benchmark.ushers.dao.impl.UsherDaoImpl;
 import com.benchmark.ushers.dao.model.Usher;
+import com.benchmark.ushers.service.DaoService;
 
 @Service
 public class CSVImportService{
+	private static final Logger logger = LoggerFactory.getLogger(CSVImportService.class);
 	
 	@Value("${csv.import.seprator}")
     private char seprator;
@@ -49,14 +55,20 @@ public class CSVImportService{
 		CSVReader csvReader = null;
 		List<Usher> ushers = new ArrayList<Usher>();
         try {
-             
+//        	ColumnPositionMappingStrategy<Usher> mapper = new ColumnPositionMappingStrategy<Usher>();
+//        	mapper.setType(Usher.class);
+//        	String[] columns = new String[] {"usherCode", "usherType", "usherCaliber", "firstName"}; // the fields to bind do in your JavaBean
+//        	mapper.setColumnMapping(columns);
+//        	 
+//        	CsvToBean<Usher> csv = new CsvToBean<Usher>();
+        	
+        	logger.debug("CSV data separator"+ this.seprator);
             csvReader = new CSVReader(new InputStreamReader(input), this.seprator);
+//            List<Usher> list = csv.parse(mapper, csvReader);
             List<String[]> records = csvReader.readAll();
-            
             Iterator<String[]> iterator = records.iterator();
             //skip header row
             iterator.next();
-             
             while(iterator.hasNext()){
                 String[] record = iterator.next();
                 Usher usher = new Usher();
@@ -106,9 +118,11 @@ public class CSVImportService{
             }
  
         } catch (Exception e) {
+        	logger.debug("Exception in CSV import: "+e.getMessage());
         }finally{
         	csvReader.close();
         }
+        logger.debug("Ushers count in CSV file is: "+ushers.size());
         return ushers;
 	}
 

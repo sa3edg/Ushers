@@ -10,20 +10,20 @@ public class UsherTimeSheetReport extends UsherTimeSheet{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private List<Date> dates;
+	private List<String> dates;
 	private int daysCount;
-	private int totalDays;
+	private float totalDays;
 	private int dayMoneyAmount;
-	private int moneyAmount;
-	private int totalMoneyAmount;
+	private float moneyAmount;
+	private float totalMoneyAmount;
 	private String uniform = "";
 	private String usherIdentificationId = "";
 	private String usherSigniture = "";
 	
-	public List<Date> getDates() {
+	public List<String> getDates() {
 		return dates;
 	}
-	public void setDates(List<Date> dates) {
+	public void setDates(List<String> dates) {
 		this.dates = dates;
 	}
 	public int getDaysCount() {
@@ -32,10 +32,10 @@ public class UsherTimeSheetReport extends UsherTimeSheet{
 	public void setDaysCount(int daysCount) {
 		this.daysCount = daysCount;
 	}
-	public int getTotalDays() {
+	public float getTotalDays() {
 		return totalDays;
 	}
-	public void setTotalDays(int totalDays) {
+	public void setTotalDays(float totalDays) {
 		this.totalDays = totalDays;
 	}
 	public int getDayMoneyAmount() {
@@ -44,16 +44,16 @@ public class UsherTimeSheetReport extends UsherTimeSheet{
 	public void setDayMoneyAmount(int dayMoneyAmount) {
 		this.dayMoneyAmount = dayMoneyAmount;
 	}
-	public int getMoneyAmount() {
+	public float getMoneyAmount() {
 		return moneyAmount;
 	}
-	public void setMoneyAmount(int moneyAmount) {
+	public void setMoneyAmount(float moneyAmount) {
 		this.moneyAmount = moneyAmount;
 	}
-	public int getTotalMoneyAmount() {
+	public float getTotalMoneyAmount() {
 		return totalMoneyAmount;
 	}
-	public void setTotalMoneyAmount(int totalMoneyAmount) {
+	public void setTotalMoneyAmount(float totalMoneyAmount) {
 		this.totalMoneyAmount = totalMoneyAmount;
 	}
 	public String getUniform() {

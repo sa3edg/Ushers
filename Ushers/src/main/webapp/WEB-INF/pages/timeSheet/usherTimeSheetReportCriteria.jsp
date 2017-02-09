@@ -28,16 +28,22 @@
                             <tr>
                             	<td><form:label path="fromDate"><spring:message code="timesheet.usher.fromDate"/></form:label></td>
                             	<td><form:select path="fromDate" items="${dates}" /></td>
+                            </tr>
+                             <tr>
                             	<td><form:label path="toDate"><spring:message code="timesheet.usher.toDate"/></form:label></td>
                             	<td><form:select path="toDate" items="${dates}" /></td>
                             </tr>
 							<tr>
-								<td><input type="submit" class="btn" onClick="popup();" name="showReportPopupParam"
-									value=<spring:message code="timesheet.usher.btn.createReport" /> /></td>
-								<td><input type="submit" class="btn" onClick="this.form.target='_blank';return true;" name="showReportNewWindowParam"
-									value=<spring:message code="timesheet.usher.btn.createReport" /> /></td>
-								<td><input type="submit" class="btn" name="exportReportToPDF"
-									value=<spring:message code="timesheet.usher.btn.createReport" /> /></td>
+								<td style="padding-left: 30px;"><input type="submit" class="btn" onClick="popup();" name="showReportPopupParam"
+									value=<spring:message code="timesheet.usher.btn.popUp" /> /></td>
+								<td style="padding-left: 30px;"><input type="submit" class="btn" onClick="this.form.target='_blank';return true;" name="showReportNewWindowParam"
+									value=<spring:message code="timesheet.usher.btn.newWindow" /> /></td>
+								<td style="padding-left: 30px;"><input type="submit" class="btn" name="exportReportToPDF"
+									value=<spring:message code="timesheet.usher.btn.exportToPDF" /> /></td>
+								<td style="padding-left: 30px;"><input type="submit" class="btn" name="exportReportToExcel"
+									value=<spring:message code="timesheet.usher.btn.exportToExcel" /> /></td>
+								<td style="padding-left: 30px;"><input type="submit" class="btn" onClick="popup();" name="print"
+									value=<spring:message code="timesheet.usher.btn.print" /> /></td>
 							</tr>
 						</table>
 					</form:form>

@@ -7,7 +7,7 @@
 	<tiles:putAttribute name="body">
 		<div class="body">
 			<sec:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_SUPER_USER', 'ROLE_USHER')">
-				<div style="text-align: center; padding: 30px; width: 850px;">
+				<div style="padding: 30px;">
 					<form:form method="post" action="addUsher?${_csrf.parameterName}=${_csrf.token}" modelAttribute="usher" enctype="multipart/form-data">
 					    <c:set var="validateFirstName"><spring:message code="ushers.valid.firstname" /></c:set>
 					    <c:set var="validateSecondName"><spring:message code="ushers.valid.middlename" /></c:set>
@@ -24,28 +24,28 @@
 					    <c:set var="validateAge"><spring:message code="ushers.valid.age" /></c:set>
 					    <c:set var="validateKidsNumber"><spring:message code="ushers.valid.kidsNumber" /></c:set>
 					    <c:set var="validateEmail"><spring:message code="ushers.valid.email" /></c:set>
-						<table>
+						<table class="reset_table mynew_style">
 						     <tr>
 						   	<td><form:hidden path="usherCode" /></td>
 						   </tr>
 							<tr>
-							    <td><form:label path="usherType"><spring:message code="usher.usherType"/></form:label><span class="required"/></td>
+							    <td><form:label class="required" path="usherType"><spring:message code="usher.usherType"/></form:label></td>
 								<td><form:select path="usherType" items="${usherTypes}" /></td>
 							</tr>
 							<tr>
-							    <td><form:label path="usherCaliber"><spring:message code="usher.usherCaliber"/></form:label><span class="required"/></td>
+							    <td><form:label class="required" path="usherCaliber"><spring:message code="usher.usherCaliber"/></form:label></td>
 								<td><form:select path="usherCaliber" items="${ushersCalibers}" /></td>
 							</tr>
 							<tr>
-							    <td><form:label path="firstName"><spring:message code="usher.firstName"/></form:label><span class="required"/></td>
+							    <td><form:label class="required" path="firstName"><spring:message code="usher.firstName"/></form:label></td>
 								<td><form:input path="firstName" styleId="firstName" /></td>
 							</tr>
 							<tr>
-							    <td><form:label path="middleName"><spring:message code="usher.middleName"/></form:label><span class="required"/></td>
+							    <td><form:label class="required" path="middleName"><spring:message code="usher.middleName"/></form:label></td>
 								<td><form:input path="middleName"  styleId="middleName" /></td>
 							</tr>
 							<tr>
-							    <td><form:label path="lastName"><spring:message code="usher.lastName"/></form:label><span class="required"/></td>
+							    <td><form:label class="required" path="lastName"><spring:message code="usher.lastName"/></form:label></td>
 								<td><form:input path="lastName" styleId="lastName" /></td>
 							</tr>
 							<tr>
@@ -64,7 +64,7 @@
 								<td><form:input path="numberOfKids"  type="number" min="1" max="9" styleId="kidsNumber"/></td>
 							</tr>
 							<tr>
-                            	<td><form:label path="gender"><spring:message code="usher.gender"/></form:label><span class="required"/></td>
+                            	<td><form:label class="required" path="gender"><spring:message code="usher.gender"/></form:label></td>
                             	<td><form:select path="gender" items="${gender}" /></td>
                             </tr>
                             <tr>
@@ -89,15 +89,15 @@
 								<td><form:input path="street" /></td>
 							</tr>
 							 <tr>
-                            	<td><form:label path="area"><spring:message code="usher.area"/></form:label><span class="required"/></td>
+                            	<td><form:label class="required" path="area"><spring:message code="usher.area"/></form:label></td>
                             	<td><form:select path="area" items="${areas}" itemLabel="name" itemValue="id"/></td>
                             </tr>
 							<tr>
-                            	<td><form:label path="governorate"><spring:message code="usher.governorate"/></form:label><span class="required"/></td>
+                            	<td><form:label class="required" path="governorate"><spring:message code="usher.governorate"/></form:label></td>
                             	<td><form:select path="governorate" items="${governorates}" itemLabel="name" itemValue="id" /></td>
                             </tr>
                             <tr>
-                            	<td><form:label path="preferredLocation"><spring:message code="usher.preferredLocation"/></form:label><span class="required"/></td>
+                            	<td><form:label class="required" path="preferredLocation"><spring:message code="usher.preferredLocation"/></form:label></td>
                             	<td><form:select path="preferredLocation" items="${preferredLocations}" itemLabel="name" itemValue="id" /></td>
                             </tr>
                             <tr>
@@ -105,7 +105,7 @@
                             	<td><form:select path="preferredShift" items="${preferredShifts}"/></td>
                             </tr>
                             <tr>
-							    <td><form:label path="mobileNumber"><spring:message code="usher.mobileNumber"/></form:label><span class="required"/></td>
+							    <td><form:label class="required" path="mobileNumber"><spring:message code="usher.mobileNumber"/></form:label></td>
 								<td><form:input path="mobileNumber" type="number" styleId="mobileNumber"/></td>
 							</tr>
 							<tr>
@@ -129,11 +129,11 @@
                             	<td><form:select path="pantsSize" items="${pantsSizes}"/></td>
                             </tr>
                             <tr>
-                            	<td><form:label path="hairType"><spring:message code="usher.hairType"/></form:label><span class="required"/></td>
+                            	<td><form:label class="required" path="hairType"><spring:message code="usher.hairType"/></form:label></td>
                             	<td><form:select path="hairType" items="${hairTypes}"/></td>
                             </tr>
                             <tr>
-                            	<td><form:label path="languages"><spring:message code="usher.languages"/></form:label><span class="required"/></td>
+                            	<td><form:label class="required" path="languages"><spring:message code="usher.languages"/></form:label></td>
                             	<td><form:select path="languages" items="${languages}" multiple="true" styleId="languages"/></td>
                             </tr>
                             <tr>
@@ -141,7 +141,7 @@
 								<td><form:input path="referredBy" /></td>
 							</tr>
 							<tr>
-							    <td><form:label path="university"><spring:message code="usher.university"/></form:label><span class="required"/></td>
+							    <td><form:label class="required" path="university"><spring:message code="usher.university"/></form:label></td>
 								<td><form:input path="university" styleId="university"/></td>
 							</tr>
 							<tr>
@@ -187,7 +187,7 @@
 								<td><form:label path="socialInsuranceExitDate"><spring:message code="usher.dateFormat"/></form:label></td>
 							</tr>
 							<tr>
-							    <td><form:label path="nationalIdNumber"><spring:message code="usher.nationalIdNumber"/></form:label><span class="required"/></td>
+							    <td><form:label class="required" path="nationalIdNumber"><spring:message code="usher.nationalIdNumber"/></form:label></td>
 								<td><form:input path="nationalIdNumber"  styleId="nationalIdNumber" /></td>
 							</tr>
 							<tr>

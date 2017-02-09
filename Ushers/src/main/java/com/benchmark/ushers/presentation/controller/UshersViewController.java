@@ -65,7 +65,7 @@ public class UshersViewController extends AbstractViewController {
 		if (request.isUserInRole(UserRole.ADMIN_ROLE) || request.isUserInRole(UserRole.SUPER_USER_ROLE) || request.isUserInRole(UserRole.USHER_ROLE)) {
 			List<Usher> ushers = daoService.getUsherDaoImpl().findAll();
 			model.addObject("ushers", ushers);
-			model.setViewName("ushers/ushers");
+			model.setViewName("ushers/ushersData");
 		}
 		return model;
 

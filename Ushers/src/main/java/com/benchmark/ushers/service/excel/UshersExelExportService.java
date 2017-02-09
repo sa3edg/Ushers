@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -140,7 +141,11 @@ public class UshersExelExportService extends AbstractExcelExportService{
 			excelRow.createCell(7).setCellValue(usher.isHasKids());
 			excelRow.createCell(8).setCellValue(usher.getNumberOfKids());
 			excelRow.createCell(9).setCellValue(usher.getGender());
-			excelRow.createCell(10).setCellValue(usher.getBirthDate());
+			if(usher.getBirthDate() != null){
+				excelRow.createCell(10).setCellValue(usher.getBirthDate());
+			}else{
+				excelRow.createCell(10).setCellValue(StringUtils.EMPTY);
+			}
 			excelRow.createCell(11).setCellValue(usher.getAge());
 			excelRow.createCell(12).setCellValue(usher.getAddress());
 			excelRow.createCell(13).setCellValue(usher.getAppartmentNumber());
@@ -166,9 +171,17 @@ public class UshersExelExportService extends AbstractExcelExportService{
 			excelRow.createCell(33).setCellValue(usher.getEmailAddress());
 			excelRow.createCell(34).setCellValue(usher.isSocialInsurance());
 			excelRow.createCell(35).setCellValue(usher.getSocialInsuranceNumber());
-			excelRow.createCell(36).setCellValue(usher.getSocialInsuranceDate());
+			if(usher.getSocialInsuranceDate() != null){
+				excelRow.createCell(36).setCellValue(usher.getSocialInsuranceDate());
+			}else{
+				excelRow.createCell(36).setCellValue(StringUtils.EMPTY);
+			}
 			excelRow.createCell(37).setCellValue(usher.isSocialInsuranceForm6());
-			excelRow.createCell(38).setCellValue(usher.getSocialInsuranceExitDate());
+			if(usher.getSocialInsuranceExitDate() != null){
+				excelRow.createCell(38).setCellValue(usher.getSocialInsuranceExitDate());
+			}else{
+				excelRow.createCell(38).setCellValue(StringUtils.EMPTY);
+			}
 			excelRow.createCell(39).setCellValue(usher.getNationalIdNumber());
 			excelRow.createCell(40).setCellValue(usher.getAdditionalInformation());
 			excelRow.createCell(41).setCellValue(usher.getRate());

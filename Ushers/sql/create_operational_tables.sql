@@ -131,9 +131,9 @@ CREATE TABLE ushers (
 DROP TABLE IF EXISTS projects;
 CREATE TABLE projects (
                    project_code varchar(7) NOT NULL,
-                   client_id varchar(50) NOT NULL ,
-                   product_id varchar(50) NOT NULL ,
-                   project_type_id varchar(50) NOT NULL ,
+                   client_id int(20) NOT NULL ,
+                   product_id int(20) NOT NULL ,
+                   project_type_id int(20) NOT NULL ,
                    project_name varchar(100) NOT NULL ,
                    project_date DATE default NULL ,
                    project_start_date DATE default NULL ,
@@ -157,8 +157,9 @@ DROP TABLE IF EXISTS ushers_time_sheet;
 CREATE TABLE ushers_time_sheet (
                    id int(20) NOT NULL AUTO_INCREMENT,
                    project_id varchar(7) NOT NULL,
-                   project_location_id varchar(7) NOT NULL,
+                   project_location_id int(20) NOT NULL,
                    usher_code varchar(7) NOT NULL,
+                   day_salary int(5) NOT NULL,
                    deduction float default 0 ,
                    debit int(5) default 0 ,
                    sheet_date DATE default NULL ,
@@ -166,5 +167,21 @@ CREATE TABLE ushers_time_sheet (
                    PRIMARY KEY  (id)
                  ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 --end ushers_time_sheet table
+
+--add usher_rating table
+DROP TABLE IF EXISTS usher_rating;
+CREATE TABLE usher_rating (
+                   id int(20) NOT NULL AUTO_INCREMENT,
+                   project_id varchar(7) NOT NULL,
+                   project_type_id int(20) NOT NULL,
+                   product_id int(20) NOT NULL,
+                   usher_code varchar(7) NOT NULL,
+                   client_feedback text default NULL,
+                   supervisor_feedback text default NULL,
+                   usher_coordinator_feedback text default NULL,
+                   rate varchar(50) default NULL ,
+                   PRIMARY KEY  (id)
+                 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+--end usher_rating table
 
 ;;

@@ -2,8 +2,11 @@ package com.benchmark.ushers.common.util;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
@@ -111,6 +114,36 @@ public class DateUtil {
 			return null;
 		DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
 		return  formatter.parse(date);
+	}
+	public static String getMySqlDateString(java.util.Date date)
+	{
+		DateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
+		return  formatter.format(date);
+	}
+	
+	public static String getDateStringForTimeSheet(java.util.Date date)
+	{
+		DateFormat formatter = new SimpleDateFormat("dd-MMM");
+		return  formatter.format(date);
+	}
+	public static List<String> getDateDatesString(List<Date> dates){
+		List<String> datesString = new ArrayList<String>();
+		for(Date date : dates){
+			datesString.add(DateUtil.getDateStringForTimeSheet(date));
+		}
+		return datesString;
+	}
+	
+	public static List<String> getDatesList(java.util.Date fromDate, java.util.Date toDate){
+		List<String> dates = new ArrayList<String>();
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(fromDate);
+		dates.add(getDateStringForTimeSheet(cal.getTime()));
+		while (cal.getTime().before(toDate)) {
+		    cal.add(Calendar.DATE, 1);
+		    dates.add(getDateStringForTimeSheet(cal.getTime()));
+		}
+		return dates;
 	}
 
 }
